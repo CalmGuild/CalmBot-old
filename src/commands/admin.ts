@@ -1,6 +1,6 @@
 import { Message, User } from "discord.js";
 import Client from "../structures/Client";
-import adminmanualchallenge from "../handlers/adminmanualchallenge";
+import adminmanualchallenge from "../handlers/admin/adminmanualchallenge";
 module.exports = {
   name: "admin",
   description: "For admin use only",
