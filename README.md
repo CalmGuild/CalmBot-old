@@ -25,9 +25,11 @@
 
 3. Rename `example.env` to `.env` and input the correct details into the fields
 
-4. Run `yarn --frozen-lockfile` to install all required packages
+4: Run `yarn global install ts-node`
 
-5. Run `yarn dev` to start the bot
+5. Run `yarn --frozen-lockfile` to install all required packages
+
+6. Run `yarn start` to start the bot
 
 Make sure to create a **bug report** in the form of a *feature request* before submitting any pull requests for new features. This will increase the chances of your pull request getting accepted!
   
