@@ -1,7 +1,8 @@
-import { Client, Message, Role } from "discord.js";
+import { Message, Role } from "discord.js";
+import Client from "../structures/Client";
+import ChallengeParticipant from "../schemas/ChallengeParticipant";
 const Challenges = require("../data/calm/challenges/DecemberChallenges.json");
 const Roles = require("../data/calm/roles.json");
-import ChallengeParticipant from "../schemas/ChallengeParticipant";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
