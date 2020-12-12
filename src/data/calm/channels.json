@@ -30,8 +30,8 @@
       "id": "762824106965205023",
       "public": false
     },
-    "ALLY_REQUEST_RANKS": {
-      "name": "ally-request-ranks",
+    "REQUEST_ROLES": {
+      "name": "request-roles",
       "id": "742231182883946516",
       "public": true
     }
@@ -40,6 +40,11 @@
     "NEWS": {
       "name": "news",
       "id": "607422034925846538",
+      "public": false
+    },
+    "WEEKLY_GTOP": {
+      "name": "weekly-gtop",
+      "id": "785275503941910528",
       "public": false
     },
     "NITRO_BOOSTS": {
@@ -57,9 +62,19 @@
       "id": "621718469024415756",
       "public": false
     },
+    "QOTD" : {
+      "name": "qotd",
+      "id:": "778427786809442304",
+      "public": false
+    },
     "CALMGUILD_ON_TWITTER": {
       "name": "calmguild-on-twitter",
       "id": "729708440699666543",
+      "public": false
+    },
+    "HOPEZ_CONTENT": {
+      "name": "hopez-content",
+      "id": "782660852163543080",
       "public": false
     }
   },
@@ -111,21 +126,21 @@
       "id": "734806266353811476",
       "public": true
     },
-    "GIVEAWAY_IGN": {
-      "name": "giveaway-ign",
-      "id": "767066056207630416",
+    "WEIRDFLEX_BUTOKAY": {
+      "name": "weirdflex-butokay",
+      "id": "769638435647520819",
       "public": true
     }
   },
   "MISC": {
-    "FEEDBACK": {
-      "name": "feedback",
-      "id": "704802414200488036",
-      "public": true
-    },
     "ARTWORK": {
       "name": "artwork",
       "id": "765987946045112320",
+      "public": true
+    },
+    "QOTD_ANSWER": {
+      "name": "qotd-answer",
+      "id": "778429190223560734",
       "public": true
     },
     "QUOTES": {
@@ -133,19 +148,14 @@
       "id": "751649950374428722",
       "public": true
     },
-    "MEMES": {
-      "name": "memes",
-      "id": "543548542204248065",
+    "COUNTING": {
+      "name": "counting",
+      "id": "727228625903943690",
       "public": true
     },
     "SKYBLOCK_CHAT": {
       "name": "skyblock-chat",
       "id": "737090276837031986",
-      "public": true
-    },
-    "COUNTING": {
-      "name": "counting",
-      "id": "727228625903943690",
       "public": true
     },
     "PROGRAMMING_TALK": {
@@ -178,14 +188,9 @@
       "name": "no-mic",
       "id": "509497019002519553",
       "public": true
-    },
-    "AMONG_US": {
-      "name": "among-us",
-      "id": "759858825892593714",
-      "public": true
     }
   },
-  "SMP": {
+  "CALM_SMP": {
     "SMP_ANNOUNCEMENTS": {
       "name": "smp-announcements",
       "id": "750522535862337577",
@@ -197,11 +202,45 @@
       "public": true,
       "membersOnly": true
     },
+    "MOD_SUGGESTIONS": {
+      "name": "mod-suggestions",
+      "id": "780442129650286652",
+      "public": true,
+      "membersOnly": true
+    },
     "IGNS": {
       "name": "igns",
       "id": "751114136951455814",
       "public": true,
       "membersOnly": true
+    }
+  },
+  "WEEKLY_MONTHLY": {
+    "LEADERBOARDS": {
+      "name": "leaderboards",
+      "id": "694916067084206140",
+      "public": false
+    },
+    "MONTHLY_CHALLENGES": {
+      "name": "monthly-challenges",
+      "id": "694556310720479273",
+      "public": false
+    },
+    "CHALLENGE_PROOF": {
+      "name": "challenge-proof",
+      "id": "694564620303597608",
+      "public": false
+    },
+    "WEEKLY_MILESTONES": {
+      "name": "weekly-milestones",
+      "id": "618533150112350218",
+      "public": false
+    },
+    "MILESTONE_SUBMISSIONS": {
+      "name": "milestones-submissions",
+      "id": "753699940110172211",
+      "public": true,
+      "membersOnly": "true"
     }
   },
   "EVENTS": {
