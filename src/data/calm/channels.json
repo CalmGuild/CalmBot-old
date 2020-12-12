@@ -1,0 +1,231 @@
+{
+  "UPON_JOINING": {
+    "JOIN_LEAVE": {
+      "name": "join-leave",
+      "id": "501516361797730304",
+      "public": false
+    },
+    "RULES": {
+      "name": "rules",
+      "id": "614593751112876090",
+      "public": false
+    },
+    "INFO": {
+      "name": "info",
+      "id": "537987197517824012",
+      "public": false
+    },
+    "ROLE_INFO": {
+      "name": "role-info",
+      "id": "614593719903059968",
+      "public": false
+    },
+    "SELF_ASSIGN_ROLES": {
+      "name": "self-assign-roles",
+      "id": "555139842208563227",
+      "public": false
+    },
+    "FAQ": {
+      "name": "faq",
+      "id": "762824106965205023",
+      "public": false
+    },
+    "ALLY_REQUEST_RANKS": {
+      "name": "ally-request-ranks",
+      "id": "742231182883946516",
+      "public": true
+    }
+  },
+  "IMPORATNT": {
+    "NEWS": {
+      "name": "news",
+      "id": "607422034925846538",
+      "public": false
+    },
+    "NITRO_BOOSTS": {
+      "name": "nitro-boosts",
+      "id": "753228090389430272",
+      "public": false
+    },
+    "GIVEAWAYS": {
+      "name": "giveaways",
+      "id": "679415270435192842",
+      "public": false
+    },
+    "POLLS": {
+      "name": "polls",
+      "id": "621718469024415756",
+      "public": false
+    },
+    "CALMGUILD_ON_TWITTER": {
+      "name": "calmguild-on-twitter",
+      "id": "729708440699666543",
+      "public": false
+    }
+  },
+  "SUGGESTIONS": {
+    "SUGGESTION_DISCUSSION": {
+      "name": "suggestion-discussion",
+      "id": "772576367190999050",
+      "public": true
+    },
+    "SUGGESTIONS": {
+      "name": "suggestions",
+      "id": "770049673657843732",
+      "public": false
+    },
+    "EMOTE_SUGGESTIONS": {
+      "name": "emote-suggestions",
+      "id": "627304676957618195",
+      "public": false
+    },
+    "MOVIE_SUGGESTIONS": {
+      "name": "movie-suggestions",
+      "id": "713917298674499646",
+      "public": true
+    },
+    "CHALLENGE_SUGGESTIONS": {
+      "name": "challenge-suggestions",
+      "id": "684861975028826132",
+      "public": false
+    }
+  },
+  "COMMUNITY": {
+    "STARBOARD": {
+      "name": "starboard",
+      "id": "648632809694691369",
+      "public": false
+    },
+    "GENERAL": {
+      "name": "general",
+      "id": "501501905508237315",
+      "public": true
+    },
+    "COMMANDS": {
+      "name": "commands",
+      "id": "755609336155209858",
+      "public": true
+    },
+    "MEDIA": {
+      "name": "media",
+      "id": "734806266353811476",
+      "public": true
+    },
+    "GIVEAWAY_IGN": {
+      "name": "giveaway-ign",
+      "id": "767066056207630416",
+      "public": true
+    }
+  },
+  "MISC": {
+    "FEEDBACK": {
+      "name": "feedback",
+      "id": "704802414200488036",
+      "public": true
+    },
+    "ARTWORK": {
+      "name": "artwork",
+      "id": "765987946045112320",
+      "public": true
+    },
+    "QUOTES": {
+      "name": "quotes",
+      "id": "751649950374428722",
+      "public": true
+    },
+    "MEMES": {
+      "name": "memes",
+      "id": "543548542204248065",
+      "public": true
+    },
+    "SKYBLOCK_CHAT": {
+      "name": "skyblock-chat",
+      "id": "737090276837031986",
+      "public": true
+    },
+    "COUNTING": {
+      "name": "counting",
+      "id": "727228625903943690",
+      "public": true
+    },
+    "PROGRAMMING_TALK": {
+      "name": "programming-talk",
+      "id": "758768983058284614",
+      "public": true
+    },
+    "INTRODUCTIONS": {
+      "name": "introductions",
+      "id": "765031417301827585",
+      "public": true
+    }
+  },
+  "GUILD_ONLY": {
+    "INACTIVITY": {
+      "name": "inactivity",
+      "id": "518507972356210688",
+      "public": false,
+      "membersOnly": true
+    },
+    "GUILD_ONLY": {
+      "name": "guild-only",
+      "id": "568264444090515457",
+      "public": false,
+      "membersOnly": true
+    }
+  },
+  "VOICE": {
+    "NO_MIC": {
+      "name": "no-mic",
+      "id": "509497019002519553",
+      "public": true
+    },
+    "AMONG_US": {
+      "name": "among-us",
+      "id": "759858825892593714",
+      "public": true
+    }
+  },
+  "SMP": {
+    "SMP_ANNOUNCEMENTS": {
+      "name": "smp-announcements",
+      "id": "750522535862337577",
+      "public": false
+    },
+    "SMP_CHAT": {
+      "name": "smp-chat",
+      "id": "750522550513041448",
+      "public": true,
+      "membersOnly": true
+    },
+    "IGNS": {
+      "name": "igns",
+      "id": "751114136951455814",
+      "public": true,
+      "membersOnly": true
+    }
+  },
+  "EVENTS": {
+    "EVENTS": {
+      "name": "events",
+      "id": "506270710293987328",
+      "public": false
+    },
+    "EVENTS_CHAT": {
+      "name": "events-chat",
+      "id": "509497203761479710",
+      "public": true
+    },
+    "MOVIE_NIGHT": {
+      "name": "movie-night",
+      "id": "713221973286846494",
+      "public": false
+    }
+  },
+  "STAFF": {
+    "CHALLENGES": {
+      "name": "challenge-requests",
+      "id": "787202572032278539",
+      "public": false
+    }
+  }
+}

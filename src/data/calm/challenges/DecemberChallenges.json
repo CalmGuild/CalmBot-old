@@ -1,0 +1,230 @@
+{
+  "1":{
+    "name": "Kill someone in the main lobby snowball fight",
+    "points": 1,
+    "id": "e1"
+  },
+  "2":{
+    "name": "Win a game of Grinch Simulator",
+    "points": 1,
+    "id": "e2"
+  },
+  "3":{
+    "name": "Open a Merry Loot Chest in any gamemode",
+    "points": 1,
+    "id": "e3"
+  },
+  "4":{
+    "name": "Win a game of Santa Says",
+    "points": 1,
+    "id": "e4"
+  },
+  "5":{
+    "name": "Win any game on a Christmas map",
+    "points": 1,
+    "id": "e5"
+  },
+  "6":{
+    "name": "Purchase/own Fireplace or Snowflake theme in Build Battle",
+    "points": 1,
+    "id": "e6"
+  },
+  "7":{
+    "name": "Win a game with the Coldsnap victory dance",
+    "points": 1,
+    "id": "e7"
+  },
+  "8":{
+    "name": "Get 20 points in Grinch Simulator",
+    "points": 1,
+    "id": "e8"
+  },
+  "9":{
+    "name": "Rise a horse on the Merry Go Round in the main lobby",
+    "points": 1,
+    "id": "e9"
+  },
+  "10":{
+    "name": "Say hi to Groopo in the main lobby",
+    "points": 1,
+    "id": "e10"
+  },
+  "11":{
+    "name": "Bounce on the bouncy castle in the main lobby",
+    "points": 1,
+    "id": "e11"
+  },
+  "12":{
+    "name": "Claim and advent calendar gift",
+    "points": 1,
+    "id": "e12"
+  },
+  "13":{
+    "name": "Give someone from Calm a gift on Skyblock",
+    "points": 1,
+    "id": "e13"
+  },
+  "14":{
+    "name": "Bring a Christmas gift back to the shop in Bedwars",
+    "points": 1,
+    "id": "e14"
+  },
+  "15":{
+    "name": "Purchase/own the Gift Explosion kill effect in Skywars",
+    "points": 1,
+    "id": "e15"
+  },
+
+  "16":{
+    "name": "/gift someone in Calm",
+    "points": 3,
+    "id": "m1"
+  },
+  "17":{
+    "name": "Get Shimmering Wings or Blizzard Cloak from a Christmas Mystery Box",
+    "points": 3,
+    "id": "m2"
+  },
+  "18":{
+    "name": "Win a build battle holiday mode game",
+    "points": 3,
+    "id": "m3"
+  },
+  "19":{
+    "name": "Obtain all Advent Calendar rewards",
+    "points": 3,
+    "id": "m4"
+  },
+  "20":{
+    "name": "win a game of Grinch Simulator with 40 points",
+    "points": 3,
+    "id": "m5"
+  },
+  "21":{
+    "name": "win a game of Santa Says with 25 points",
+    "points": 3,
+    "id": "m6"
+  },
+  "22":{
+    "name": "25 daily ws in any duels mode",
+    "points": 3,
+    "id": "m7"
+  },
+  "23":{
+    "name": "win a game of tnt wizards",
+    "points": 3,
+    "id": "m8"
+  },
+  "24":{
+    "name": "Win a game with Sloth Kit in Skywars",
+    "points": 3,
+    "id": "m9"
+  },
+  "25":{
+    "name": "Build a snowman in UHC",
+    "points": 3,
+    "id": "m10"
+  },
+  "26":{
+    "name": "Win a tsw game having 5 or more kills and your teammate having no kills or assists",
+    "points": 3,
+    "id": "m11"
+  },
+  "27":{
+    "name": "Win a game of Paintball with 50 kills",
+    "points": 3,
+    "id": "m12"
+  },
+  "28":{
+    "name": "Win a game of Blitz",
+    "points": 3,
+    "id": "m13"
+  },
+  "29":{
+    "name": "Win a game of Mega Walls",
+    "points": 3,
+    "id": "m14"
+  },
+  "30":{
+    "name": "Get 75 kills in one game of The Blocking Dead",
+    "points": 3,
+    "id": "m15"
+  },
+
+  "31":{
+    "name": "Win a game of Pixel Painters",
+    "points": 5,
+    "id": "h1"
+  },
+  "32":{
+    "name": "Win a game of Blitz using Rambo kit",
+    "points": 5,
+    "id": "h2"
+  },
+  "33":{
+    "name": "Have 25 Bedwars Christmas gifts in your ender chest at once (solo bw)",
+    "points": 5,
+    "id": "h3"
+  },
+  "34":{
+    "name": "Reach wave 50 in Creeper Attack",
+    "points": 5,
+    "id": "h4"
+  },
+  "35":{
+    "name": "Win a game of teams UHC while having 100% of the kills",
+    "points": 5,
+    "id": "h5"
+  },
+  "36":{
+    "name": "Kill 7 survivors or more in a game of VampireZ",
+    "points": 5,
+    "id": "h6"
+  },
+  "37":{
+    "name": "Kill the murderer while being blinded in MM",
+    "points": 5,
+    "id": "h7"
+  },
+  "38":{
+    "name": "Get 14 kills in a MM Assassins game",
+    "points": 5,
+    "id": "h8"
+  },
+  "39":{
+    "name": "Wear Exodus, Dragon Armor, Hide of Leviathan and Seven League Boots at the same time",
+    "points": 5,
+    "id": "h9"
+  },
+  "40":{
+    "name": " Kill the ender dragon in Bedwars",
+    "points": 5,
+    "id": "h10"
+  },
+  "41":{
+    "name": "Get 15 TSW kills with your teammate having 0 kills or assists",
+    "points": 5,
+    "id": "h11"
+  },
+  "42":{
+    "name": "Get 15 kills in a solo Blitz game",
+    "points": 5,
+    "id": "h12"
+  },
+  "43":{
+    "name": "Get 150 kills in one game of The Blocking Dead",
+    "points": 5,
+    "id": "h13"
+  },
+  "44":{
+    "name": "Win a game of UHC with 15 kills (solo)",
+    "points": 5,
+    "id": "h14"
+  },
+  "45":{
+    "name": "Pick up 40 gold in 1 MM game (excluding Gold Rush map)",
+    "points": 5,
+    "id": "h15"
+  }
+
+}
