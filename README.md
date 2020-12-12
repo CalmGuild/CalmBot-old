@@ -25,7 +25,7 @@
 
 3. Rename `example.env` to `.env` and input the correct details into the fields
 
-4: Run `yarn global install ts-node`
+4. Run `yarn global install ts-node`
 
 5. Run `yarn --frozen-lockfile` to install all required packages
 
