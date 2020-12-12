@@ -32,7 +32,7 @@ module.exports = {
       return;
     }
 
-    const suggestionEmbed = new MessageEmbed().setFooter(`${message.member.displayName}`, message.author.displayAvatarURL()).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
+    const suggestionEmbed = new MessageEmbed().setFooter(`${message.member.displayName}`, message.author.displayAvatarURL()).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setFooter(`CalmBot v${client.version}`).setTimestamp();
 
     message.channel.send("Thanks for the suggestion! \n**Check it out: <#" + suggestionChannel.id + ">**");
     suggestionChannel.send(suggestionEmbed).then(m =>{
