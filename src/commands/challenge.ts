@@ -4,9 +4,9 @@ import Client from "../structures/Client";
 import ChallengeParticipant from "../schemas/ChallengeParticipant";
 import { MessageEmbed, Message, MessageAttachment } from "discord.js";
 
-import challengecheck from "../handlers/challengecheck";
-import challengeleaderboard from "../handlers/challengeleaderboard";
-import challengedenyrequest from "../handlers/challengedenyrequest";
+import challengecheck from "../handlers/challenges/challengecheck";
+import challengeleaderboard from "../handlers/challenges/challengeleaderboard";
+import challengedenyrequest from "../handlers/challenges/challengedenyrequest";
 module.exports = {
   name: "challenge",
   description: "Make a challenge request doing c!challenge (challenge-id) (challenge-proof in form of picture or gamelink) ",
@@ -24,7 +24,7 @@ module.exports = {
     } else if (args[0] === "leaderboard") {
       challengeleaderboard.run(client, message, args);
       return;
-    } else if(args[0] === "denyrequest") {
+    } else if (args[0] === "denyrequest") {
       challengedenyrequest.run(client, message, args);
       return;
     }

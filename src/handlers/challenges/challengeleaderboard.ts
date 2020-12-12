@@ -1,8 +1,8 @@
 import { Message, Role } from "discord.js";
-import Client from "../structures/Client";
-import ChallengeParticipant from "../schemas/ChallengeParticipant";
-const Roles = require("../data/calm/roles.json");
-const Challenges = require("../data/calm/challenges/DecemberChallenges.json");
+import Client from "../../structures/Client";
+import ChallengeParticipant from "../../schemas/ChallengeParticipant";
+const Roles = require("../../data/calm/roles.json");
+const Challenges = require("../../data/calm/challenges/DecemberChallenges.json");
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
@@ -36,16 +36,16 @@ export default {
 
     let msg = "";
     msg += `**Challenge Leaderboard**\n\n`;
-    for(let i = 1; i < lb.length + 1; i++){
+    for (let i = 1; i < lb.length + 1; i++) {
       msg += `\`#${i}\` | <@${lb[i - 1][0]}> with ${lb[i - 1][1]} points.\n`;
     }
-    if(lb.length === 0){
-      msg += "**No Entries Yet** ):"
+    if (lb.length === 0) {
+      msg += "**No Entries Yet** ):";
     }
     //Make it so message does not ping
-    message.channel.send("Loading Message...").then(m => {
+    message.channel.send("Loading Message...").then((m) => {
       m.edit(msg);
-    });    
+    });
   },
 };
 

@@ -1,6 +1,6 @@
-const Channels = require("../data/calm/channels.json");
-const Roles = require("../data/calm/roles.json");
-import Client from "../structures/Client";
+const Channels = require("../../data/calm/channels.json");
+const Roles = require("../../data/calm/roles.json");
+import Client from "../../structures/Client";
 import { Message, MessageEmbed, Role, TextChannel } from "discord.js";
 
 export default {
@@ -26,7 +26,7 @@ export default {
       return;
     }
 
-    if (!requestmessage.author.bot) return; 
+    if (!requestmessage.author.bot) return;
     const channel = message.channel as TextChannel;
 
     if (message.guild.id === "501501905508237312" && message.channel.id !== Channels.STAFF.CHALLENGES.id) return;

@@ -1,6 +1,9 @@
 import { Message, User } from "discord.js";
 import Client from "../structures/Client";
-import adminmanualchallenge from "../handlers/adminmanualchallenge";
+import adminmanualchallenge from "../handlers/admin/adminmanualchallenge";
+import admindisablecommand from "../handlers/admin/admindisablecommand";
+import adminenablecommand from "../handlers/admin/adminenablecommand";
+import adminsleep from "../handlers/admin/adminsleep";
 module.exports = {
   name: "admin",
   description: "For admin use only",
@@ -16,9 +19,18 @@ module.exports = {
       return;
     }
 
+    args[0] = args[0].toLowerCase();
     if (args[0] === "manualchallenge") {
       adminmanualchallenge.run(client, message, args);
       return;
+    } else if (args[0] === "disablecommand") {
+      admindisablecommand.run(client, message, args);
+      return;
+    } else if (args[0] === "enablecommand") {
+      adminenablecommand.run(client, message, args);
+      return;
+    } else if (args[0] === "sleep"){
+      adminsleep.run(client, message, args);
     }
   },
 };

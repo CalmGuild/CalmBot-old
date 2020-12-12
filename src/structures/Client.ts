@@ -1,15 +1,14 @@
 import fs from "fs";
 import path from "path";
 import { promisify } from "util";
-import Discord from "discord.js"; 
+import Discord from "discord.js";
 import mongoose from "mongoose";
 
 const readdir = promisify(fs.readdir);
 
 export default class Client extends Discord.Client {
-
   prefix = "c!";
-  version = "1.1";
+  version = "1.1.1";
   commands = new Map();
 
   constructor() {
