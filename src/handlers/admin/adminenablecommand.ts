@@ -8,7 +8,7 @@ export default {
       return;
     }
 
-    const cmdname = args[1];
+    const cmdname = args[1].toLowerCase();
 
     if (!client.commands.has(cmdname)) {
       message.channel.send("Invalid Command: " + cmdname);

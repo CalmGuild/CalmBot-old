@@ -8,8 +8,11 @@ export default {
       return;
     }
 
-    const cmdname = args[1];
-
+    const cmdname = args[1].toLowerCase();
+    if(cmdname === "admin"){
+      message.channel.send("You can not disable this command!")
+      return;
+    }
     if (!client.commands.has(cmdname)) {
       message.channel.send("Invalid Command: " + cmdname);
       return;
