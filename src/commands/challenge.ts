@@ -8,7 +8,7 @@ import challengecheck from "../handlers/challengecheck";
 import challengeleaderboard from "../handlers/challengeleaderboard";
 import challengedenyrequest from "../handlers/challengedenyrequest";
 module.exports = {
-  name: "Challenge",
+  name: "challenge",
   description: "Make a challenge request doing c!challenge (challenge-id) (challenge-proof in form of picture or gamelink) ",
   category: "Utility",
   run: async function challenge(client: Client, message: Message, args: Array<String>) {

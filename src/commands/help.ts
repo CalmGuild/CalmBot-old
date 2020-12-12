@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import Client from "../structures/Client";
 module.exports = {
-  name: "Help",
+  name: "help",
   description: "Shows this command",
   category: "Utility",
   run: async function run(client: Client, message: Message, args: Array<String>) {

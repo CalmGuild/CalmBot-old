@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import Client from "../structures/Client";
 
 module.exports = {
-  name: "Ping",
+  name: "ping",
   description: "Pong!",
   category: "Utility",
   run: async function ping(client: Client, message: Message) {
