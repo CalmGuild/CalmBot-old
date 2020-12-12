@@ -14,8 +14,6 @@ module.exports = {
       }
     })
     
-    console.log(categories);
-    
     array.sort((a,b)=> a.category.localeCompare(b.category));
     categories.sort();
     
