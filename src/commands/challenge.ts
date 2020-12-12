@@ -1,9 +1,3 @@
-// const Client = require("../structures/Client");
-// const Channels = require("../data/calm/channels.json");
-// const ChallengeParticipant = require("../schemas/ChallengeParticipant");
-// const mongoose = require("mongoose");
-// const { MessageEmbed, Message } = require("discord.js");
-
 const Channels = require("../data/calm/channels.json");
 const Challenges = require("../data/calm/challenges/DecemberChallenges.json");
 import Client from "../structures/Client";

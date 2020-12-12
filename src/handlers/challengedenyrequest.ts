@@ -56,7 +56,6 @@ export default {
     const userID = fields.find((f) => f.name.toLowerCase() === "user id:").value;
     const challengeID = fields.find((f) => f.name.toLowerCase() === "challenge id:").value;
 
-    // message.delete()
     const embed = new MessageEmbed();
     embed.setTitle(requestmessage.embeds[0].title.replace("Challenge Request", "Denied Challenge Request"));
     embed.setColor("#ff0000");
