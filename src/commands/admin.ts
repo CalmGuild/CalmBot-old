@@ -1,6 +1,10 @@
-import { Client, Message, User } from "discord.js";
+import { Message, User } from "discord.js";
+import Client from "../structures/Client";
 import adminmanualchallenge from "../handlers/adminmanualchallenge";
 module.exports = {
+  name: "Admin",
+  description: "For admin use only",
+  category: "Admin",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     if (!message.member.hasPermission("ADMINISTRATOR")) {
       message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");

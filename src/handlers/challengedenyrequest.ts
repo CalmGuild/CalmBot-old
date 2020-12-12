@@ -1,6 +1,7 @@
 const Channels = require("../data/calm/channels.json");
 const Roles = require("../data/calm/roles.json");
-import { Client, Message, MessageEmbed, Role, TextChannel } from "discord.js";
+import Client from "../structures/Client";
+import { Message, MessageEmbed, Role, TextChannel } from "discord.js";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {

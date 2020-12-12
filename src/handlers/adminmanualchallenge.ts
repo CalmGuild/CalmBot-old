@@ -1,4 +1,5 @@
-import { Client, Message, User } from "discord.js";
+import { Message, User } from "discord.js";
+import Client from "../structures/Client";
 const Challenges = require("../data/calm/challenges/DecemberChallenges.json");
 import ChallengeParticipant from "../schemas/ChallengeParticipant";
 
