@@ -22,10 +22,10 @@ module.exports = {
       adminmanualchallenge.run(client, message, args);
       return;
     } else if (args[0] === "disablecommand") {
-      admindisablecommand.run(client,message,args);
+      admindisablecommand.run(client, message, args);
       return;
     } else if (args[0] === "enablecommand") {
-      adminenablecommand.run(client,message,args);
+      adminenablecommand.run(client, message, args);
       return;
     }
   },

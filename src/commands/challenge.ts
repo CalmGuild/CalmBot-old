@@ -24,7 +24,7 @@ module.exports = {
     } else if (args[0] === "leaderboard") {
       challengeleaderboard.run(client, message, args);
       return;
-    } else if(args[0] === "denyrequest") {
+    } else if (args[0] === "denyrequest") {
       challengedenyrequest.run(client, message, args);
       return;
     }

@@ -26,7 +26,7 @@ export default {
       return;
     }
 
-    if (!requestmessage.author.bot) return; 
+    if (!requestmessage.author.bot) return;
     const channel = message.channel as TextChannel;
 
     if (message.guild.id === "501501905508237312" && message.channel.id !== Channels.STAFF.CHALLENGES.id) return;
