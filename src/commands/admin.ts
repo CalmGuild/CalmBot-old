@@ -4,6 +4,7 @@ import adminmanualchallenge from "../handlers/admin/adminmanualchallenge";
 import admindisablecommand from "../handlers/admin/admindisablecommand";
 import adminenablecommand from "../handlers/admin/adminenablecommand";
 import adminsleep from "../handlers/admin/adminsleep";
+import admincommand from "../handlers/admin/admincommand";
 module.exports = {
   name: "admin",
   description: "For admin use only",
@@ -31,6 +32,8 @@ module.exports = {
       return;
     } else if (args[0] === "sleep"){
       adminsleep.run(client, message, args);
+    } else if (args[0] === "command"){
+      admincommand.run(client, message, args);
     }
   },
 };
