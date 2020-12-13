@@ -9,11 +9,13 @@ module.exports = async function message(client: DiscordClient, message: Message)
 
   let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
   if (guildSettings === null) {
+    if (message.guild === null) {
+      return message.channel.send("Oh crap! An internal error occured while trying to run that command. Please re-enter the command!");
+    }
     const doc = new GuildSettings({ guildID: message.guild.id });
     await doc.save();
     guildSettings = doc;
   }
-
 
   const args = message.content.slice(client.prefix.length).trim().split(/ +/g);
 
