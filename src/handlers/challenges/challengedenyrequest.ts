@@ -30,7 +30,7 @@ export default {
     const channel = message.channel as TextChannel;
 
     if (message.guild.id === "501501905508237312" && message.channel.id !== Channels.STAFF.CHALLENGES.id) return;
-    else if (channel.name !== Channels.STAFF.CHALLENGES.name) return;
+    else if (message.guild.id !== "501501905508237312" && channel.name !== Channels.STAFF.CHALLENGES.name) return;
 
     let monthlyTeamRole: Role;
     if (message.guild.id === "501501905508237312") {

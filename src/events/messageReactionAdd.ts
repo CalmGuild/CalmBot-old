@@ -14,7 +14,7 @@ module.exports = async function messageReactionAdd(client: Client, reaction: Mes
   if (channel === undefined) return;
 
   if (message.guild.id === "501501905508237312" && message.channel.id !== Channels.STAFF.CHALLENGES.id) return;
-  else if (channel.name !== Channels.STAFF.CHALLENGES.name) return;
+  else if (message.guild.id !== "501501905508237312" && channel.name !== Channels.STAFF.CHALLENGES.name) return;
 
   let monthlyTeamRole: Role;
   if (message.guild.id === "501501905508237312") {
@@ -69,36 +69,6 @@ module.exports = async function messageReactionAdd(client: Client, reaction: Mes
 
     if (commandChannel !== undefined) {
       commandChannel.send(`Congratulations, <@${userID}>. You're challenge request for challenge #${challengeID} has been accepted. Do ${client.prefix}challenge check, to check you're progress.`);
-    }
-    message.reactions.removeAll();
-  } else if (reaction.emoji.toString() === "❌") {
-    const fields = message.embeds[0].fields;
-    const userID = fields.find((f) => f.name.toLowerCase() === "user id:").value;
-    const challengeID = fields.find((f) => f.name.toLowerCase() === "challenge id:").value;
-
-    const embed = new MessageEmbed();
-    embed.setTitle(message.embeds[0].title.replace("Challenge Request", "Denied Challenge Request"));
-    embed.setColor("#ff0000");
-    embed.addField("Challenge ID:", challengeID);
-    embed.addField("Challenge Name:", message.embeds[0].fields.find((f) => f.name === "Challenge Name:").value);
-
-    if (message.embeds[0].image !== null) {
-      embed.setImage(message.embeds[0].image.url);
-    } else {
-      embed.addField("Proof", message.embeds[0].fields.find((f) => f.name === "Proof").value);
-    }
-    embed.addField("Denied by:", user.username + "#" + user.discriminator);
-    message.edit(embed);
-
-    let commandChannel;
-    if (message.guild.id === "501501905508237312") {
-      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.COMMUNITY.COMMANDS.id);
-    } else {
-      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.COMMUNITY.COMMANDS.name);
-    }
-
-    if (commandChannel !== undefined) {
-      commandChannel.send(`Sorry, <@${userID}>. You're challenge request for challenge #${challengeID} has been denied. Please DM ${user.username + "#" + user.discriminator} for more info.`);
     }
     message.reactions.removeAll();
   }
