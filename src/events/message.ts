@@ -1,9 +1,11 @@
 import { Message } from "discord.js";
 import DiscordClient from "../structures/Client";
 import GuildSettings from "../schemas/GuildSettings";
+import { resolveTypeReferenceDirective } from "typescript";
 module.exports = async function message(client: DiscordClient, message: Message) {
   if (message.author.bot) return;
   if (!message.guild.id) return;
+  if (message.guild === null) return;
 
   if (!message.content.startsWith(client.prefix)) return;
 
