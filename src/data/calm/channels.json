@@ -124,34 +124,34 @@
     "MEDIA": {
       "name": "media",
       "id": "734806266353811476",
-      "public": true
+      "public": false
     },
     "WEIRDFLEX_BUTOKAY": {
       "name": "weirdflex-butokay",
       "id": "769638435647520819",
-      "public": true
+      "public": false
     }
   },
   "MISC": {
     "ARTWORK": {
       "name": "artwork",
       "id": "765987946045112320",
-      "public": true
+      "public": false
     },
     "QOTD_ANSWER": {
       "name": "qotd-answer",
       "id": "778429190223560734",
-      "public": true
+      "public": false
     },
     "QUOTES": {
       "name": "quotes",
       "id": "751649950374428722",
-      "public": true
+      "public": false
     },
     "COUNTING": {
       "name": "counting",
       "id": "727228625903943690",
-      "public": true
+      "public": false
     },
     "SKYBLOCK_CHAT": {
       "name": "skyblock-chat",
@@ -166,7 +166,7 @@
     "INTRODUCTIONS": {
       "name": "introductions",
       "id": "765031417301827585",
-      "public": true
+      "public": false
     }
   },
   "GUILD_ONLY": {
@@ -187,7 +187,7 @@
     "NO_MIC": {
       "name": "no-mic",
       "id": "509497019002519553",
-      "public": true
+      "public": false
     }
   },
   "CALM_SMP": {
