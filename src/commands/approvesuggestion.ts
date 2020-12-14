@@ -3,50 +3,50 @@ import Client from "../structures/Client";
 import Channels from "../data/calm/channels.json";
 
 module.exports = {
-    name: "approvesuggestion",
-    description: "Approve a suggestion!",
-    category: "Admin",
-    run: async function ping(client: Client, message: Message, args: Array<string>) {
-        // Basic checks: Adminstrator Permission; no args provided; suggestions channel
-        if (!message.member.hasPermission("ADMINISTRATOR")) {
-            message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
-            return;
-        }
+  name: "approvesuggestion",
+  description: "Approve a suggestion!",
+  category: "Admin",
+  run: async function ping(client: Client, message: Message, args: Array<string>) {
+    // Basic checks: Adminstrator Permission; no args provided; suggestions channel
+    if (!message.member.hasPermission("ADMINISTRATOR")) {
+      message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
+      return;
+    }
 
-        if (args.length === 0) return message.channel.send("Missing Arguments.\n**Usage:** `c!approvesuggestion [message id]`");
+    if (args.length === 0) return message.channel.send("Missing Arguments.\n**Usage:** `c!approvesuggestion [message id]`");
 
-        let suggestionChannel: TextChannel
-        if (message.guild.id === "501501905508237312") {
-            suggestionChannel = message.guild.channels.cache.find((chan) => chan.id === Channels.SUGGESTIONS.SUGGESTIONS.id) as TextChannel;
-        } else {
-            suggestionChannel = message.guild.channels.cache.find((chan) => chan.name === Channels.SUGGESTIONS.SUGGESTIONS.name) as TextChannel;
-        }
+    let suggestionChannel: TextChannel;
+    if (message.guild.id === "501501905508237312") {
+      suggestionChannel = message.guild.channels.cache.find((chan) => chan.id === Channels.SUGGESTIONS.SUGGESTIONS.id) as TextChannel;
+    } else {
+      suggestionChannel = message.guild.channels.cache.find((chan) => chan.name === Channels.SUGGESTIONS.SUGGESTIONS.name) as TextChannel;
+    }
 
-        // Fetches suggestion from ID provided by user, then grabs suggestion from embed description
-        var suggestion: string, approvedSuggestion: Message;
-        await suggestionChannel.messages.fetch({ around: args[0], limit: 1 })
-            .then(msg => {
-                approvedSuggestion = msg.first();
+    // Fetches suggestion from ID provided by user, then grabs suggestion from embed description
+    var suggestion: string, approvedSuggestion: Message;
+    await suggestionChannel.messages.fetch({ around: args[0], limit: 1 }).then((msg) => {
+      approvedSuggestion = msg.first();
 
-                // Checks if its in the correct channel / if it was made by the bot / if its actually an embed
-                if (!approvedSuggestion || approvedSuggestion.author !== client.user || !approvedSuggestion.embeds[0]) {
-                    return message.channel.send("Please use the `Message ID` from the suggestion in <#" + suggestionChannel.id + ">");
-                }
+      // Checks if its in the correct channel / if it was made by the bot / if its actually an embed
+      if (!approvedSuggestion || approvedSuggestion.author !== client.user || !approvedSuggestion.embeds[0]) {
+        return message.channel.send("Please use the `Message ID` from the suggestion in <#" + suggestionChannel.id + ">");
+      }
 
-                suggestion = approvedSuggestion.embeds[0].description;
+      suggestion = approvedSuggestion.embeds[0].description;
 
-                let approvedEmbed = new MessageEmbed()
-                    .setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL())
-                    .setColor("#57ff73")
-                    .setTitle("Approved Suggestion:")
-                    .setDescription(suggestion)
-                    .setTimestamp();
+      let approvedEmbed = new MessageEmbed()
+        .setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL())
+        .setColor("#57ff73")
+        .setTitle("Approved Suggestion:")
+        .setDescription(suggestion)
+        .addField("Approved By: ", message.author.username + "#" + message.author.discriminator)
+        .setTimestamp();
 
-                // Edits suggestion to indicate approval, and removes all reactions ("✅", "❎")
-                approvedSuggestion.edit(approvedEmbed);
-                approvedSuggestion.reactions.removeAll();
+      // Edits suggestion to indicate approval, and removes all reactions ("✅", "❎")
+      approvedSuggestion.edit(approvedEmbed);
+      approvedSuggestion.reactions.removeAll();
 
-                message.reply("approved the suggestion 👍")
-            });
-    },
+      message.reply("Approved the suggestion.");
+    });
+  },
 };
