@@ -1,12 +1,14 @@
 {
   "scripts": {
-    "startbot": "npx ts-node src/bot.ts"
+    "startbot": "npx ts-node src/bot.ts",
+    "dev": "nodemon src/bot.ts"
   },
   "dependencies": {
     "axios": "^0.21.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "mongoose": "^5.11.6",
+    "nodemon": "^2.0.6",
     "typescript": "^4.1.2"
   }
 }
