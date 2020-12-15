@@ -21,7 +21,7 @@ const responses = [
   "My reply is no",
   "My sources say no",
   "Outlook not so good",
-  "Very doubtful"
+  "Very doubtful",
   "I don't feel like answering that, continue on with your day",
 ];
 
