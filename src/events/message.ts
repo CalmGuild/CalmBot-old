@@ -27,6 +27,11 @@ module.exports = async function message(client: DiscordClient, message: Message)
   if (cmd) {
     if (guildSettings.disabledCommands.includes(cmd.name)) return;
     if (cmd.name !== "admin" && guildSettings.sleep) return message.channel.send("Bot is in sleep mode! Do c!admin sleep to turn it back on!");
+
+    // Temporary disable of all commands in Calm #general Channel
+    if (message.guild.id === "501501905508237312" && message.channel.id === "501501905508237315") {
+      return
+    } 
     cmd.run(client, message, args);
   }
 };
