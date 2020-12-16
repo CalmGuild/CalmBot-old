@@ -5,7 +5,7 @@ module.exports = {
   name: "ping",
   description: "Pong!",
   category: "Utility",
-  run: async function ping(client: Client, message: Message) {
+  run: async function run(client: Client, message: Message) {
     message.channel.send(`Latency is \`${Date.now() - message.createdTimestamp}ms\`, Pong!`);
   },
 };
