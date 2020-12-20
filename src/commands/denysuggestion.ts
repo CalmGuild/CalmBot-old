@@ -6,7 +6,7 @@ module.exports = {
   name: "denysuggestion",
   description: "Denies a suggestion!",
   category: "Admin",
-  run: async function ping(client: Client, message: Message, args: Array<string>) {
+  run: async function run(client: Client, message: Message, args: Array<string>) {
     // Basic checks: Adminstrator Permission; no args provided; suggestions channel
     if (!message.member.hasPermission("ADMINISTRATOR")) {
       message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
