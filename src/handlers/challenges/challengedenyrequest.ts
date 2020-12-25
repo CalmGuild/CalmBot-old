@@ -79,7 +79,7 @@ export default {
     }
 
     if (commandChannel !== undefined) {
-      commandChannel.send(`Sorry, <@${userID}>. You're challenge request for challenge #${challengeID} has been denied.\n**REASON:** ${reason}`);
+      commandChannel.send(`Sorry, <@${userID}>. your challenge request for challenge #${challengeID} has been denied.\n**REASON:** ${reason}`);
     }
     requestmessage.reactions.removeAll();
   },
