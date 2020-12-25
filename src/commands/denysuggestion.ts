@@ -34,8 +34,10 @@ module.exports = {
 
       suggestion = deniedSuggestion.embeds[0].description;
 
+      let suggestionAuthor = deniedSuggestion.embeds[0].footer.text.split(` • CalmBot v${client.version}`, 1);
+      let suggestorAvatar = deniedSuggestion.embeds[0].footer.iconURL;
       let deniedEmbed = new MessageEmbed()
-        .setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL())
+        .setFooter(`${suggestionAuthor} • CalmBot v${client.version}`, suggestorAvatar)
         .setColor("#f74a4a")
         .setTitle("Denied Suggestion:")
         .setDescription(suggestion)

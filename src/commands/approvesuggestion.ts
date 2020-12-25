@@ -33,9 +33,10 @@ module.exports = {
       }
 
       suggestion = approvedSuggestion.embeds[0].description;
-
+      let suggestionAuthor = approvedSuggestion.embeds[0].footer.text.split(` • CalmBot v${client.version}`, 1);
+      let suggestorAvatar = approvedSuggestion.embeds[0].footer.iconURL;
       let approvedEmbed = new MessageEmbed()
-        .setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL())
+        .setFooter(`${suggestionAuthor} • CalmBot v${client.version}`, suggestorAvatar)
         .setColor("#57ff73")
         .setTitle("Approved Suggestion:")
         .setDescription(suggestion)
