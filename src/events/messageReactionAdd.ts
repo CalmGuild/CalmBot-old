@@ -68,7 +68,7 @@ module.exports = async function messageReactionAdd(client: Client, reaction: Mes
     }
 
     if (commandChannel !== undefined) {
-      commandChannel.send(`Congratulations, <@${userID}>. You're challenge request for challenge #${challengeID} has been accepted. Do ${client.prefix}challenge check, to check you're progress.`);
+      commandChannel.send(`Congratulations, <@${userID}>. Your challenge request for challenge #${challengeID} has been accepted. Do ${client.prefix}challenge check, to check your progress.`);
     }
     message.reactions.removeAll();
   }

@@ -96,7 +96,7 @@ module.exports = {
       m.react("✅");
     });
     message.channel.send(
-      `<@${message.author.id}>, You're challenge has been submited by review from staff. Please be patient as this can take some time.\nContact any staff with the **Monthly Challenges Team** role if you have any questions!`
+      `<@${message.author.id}>, Your challenge has been submited by review from staff. Please be patient as this can take some time.\nContact any staff with the **Monthly Challenges Team** role if you have any questions!`
     );
   },
 };
