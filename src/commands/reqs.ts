@@ -17,10 +17,10 @@ module.exports = {
       return message.reply("we could not find the info channel!");
     }
     const send =
-      `For all the requirements please head to ${infoChannel} as they are stated there\n\n` +
-      "They are also stated on our forums thread & on our application!\n" +
-      "Forums thread: <https://hypixel.net/threads/3013892/>\n" +
-      "Application: <https://forms.gle/hdwJWdFsgiXdiCW58>";
+      `Our requirements can be found in ${infoChannel}!\n\n` +
+      "They are also stated on our *forums thread* & on our *application*!\n" +
+      "**Forums Thread**: <https://hypixel.net/threads/3013892/>\n" +
+      "**Application**: <https://forms.gle/hdwJWdFsgiXdiCW58>";
 
     message.channel.send(send);
   },

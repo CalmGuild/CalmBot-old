@@ -17,9 +17,9 @@ module.exports = {
     if (!commandsChannel) {
       return message.reply("we could not find the commands channel!");
     }
-    
+
     message.channel.send(
-      `Want a special "Birthday Nerd" role when it's your birthday?????? AWESOME! FOLLOW THE INSTRUCTIONS BELOW!\n\nGo to ${commandsChannel} and execute the command below with your personal bday:\n\nCommand: bb.set (date) [timezone]\n-Example: bb.set oct-21 es\n\nTo find the timezone the bot will accept, click this link and copy the timezone given EXACTLY how it is: https://xske.github.io/tz/`
+      `Want a special **Birthday Nerd** role when it's your birthday?????? AWESOME! FOLLOW THE INSTRUCTIONS BELOW!\n\nGo to ${commandsChannel} and execute the command below with your birthday:\n\nCommand: \`bb.set (date) [timezone]\`\n- Example: *bb.set oct-21 es*\n\nFor the timezone, click this link and copy the timezone given EXACTLY how it is: <https://xske.github.io/tz/>`
     );
   },
 };
