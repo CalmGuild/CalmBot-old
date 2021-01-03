@@ -33,13 +33,12 @@ export default {
       return;
     }
 
+    const ogMsg = await message.channel.send("**NOTE:** Due to issues with sending a message above 2K characters and crashing the bot multiple messages will be sent. Due to discord limitations this might take a little bit. Please be patient")
     let points = 0;
-    let msg1 = `**Completed Challenges** for <@${discordID}>\n\n`;
-    msg1 += "```";
-    let easy: Array<String> = [];
-    let medium: Array<String> = [];
-    let hard: Array<String> = [];
-    let impossibile: Array<String> = [];
+    let easyCompleted: Array<String> = [];
+    let mediumCompleted: Array<String> = [];
+    let hardCompleted: Array<String> = [];
+    let impossibleCompleted: Array<String> = [];
 
     for (const [challenge, value] of (await participant).completedChallenges) {
       if (value == "true") {
@@ -47,78 +46,146 @@ export default {
         const challengeObject = getChallenge(challenge);
 
         if (challengeObject.id.startsWith("e")) {
-          easy.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
+          easyCompleted.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
         } else if (challengeObject.id.startsWith("m")) {
-          medium.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
+          mediumCompleted.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
         } else if (challengeObject.id.startsWith("h")) {
-          hard.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
+          hardCompleted.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
         } else if (challengeObject.id.startsWith("i")) {
-          impossibile.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
+          impossibleCompleted.push(`id:${challengeObject.id} | ${challengeObject.name}\n`);
         }
       }
     }
 
-    if (easy.length !== 0) msg1 += "\nEASY\n";
-    for (const text in easy) {
-      msg1 += easy[text];
-    }
-    if (medium.length !== 0) msg1 += "\nMEDIUM\n";
-    for (const text in medium) {
-      msg1 += medium[text];
-    }
-    if (hard.length !== 0) msg1 += "\nHARD\n";
-    for (const text in hard) {
-      msg1 += hard[text];
-    }
-    if (impossibile.length !== 0) msg1 += "\nIMPOSSIBILE\n";
-    for (const text in impossibile) {
-      msg1 += impossibile[text];
-    }
-    msg1 += "\n";
-    msg1 += "```";
-
-    easy = [];
-    medium = [];
-    hard = [];
-    impossibile = [];
+    let easyMissing: Array<String> = [];
+    let mediumMissing: Array<String> = [];
+    let hardMissing: Array<String> = [];
+    let impossibleMissing: Array<String> = [];
 
     let msg2 = `\n\n**Missing Challenges**`;
     msg2 += "```";
     for (const challenge in Challenges) {
       if (!(await participant).completedChallenges.has(Challenges[challenge].id)) {
         if (Challenges[challenge].id.startsWith("e")) {
-          easy.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
+          easyMissing.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
         } else if (Challenges[challenge].id.startsWith("m")) {
-          medium.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
+          mediumMissing.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
         } else if (Challenges[challenge].id.startsWith("h")) {
-          hard.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
+          hardMissing.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
         } else if (Challenges[challenge].id.startsWith("i")) {
-          impossibile.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
+          impossibleMissing.push(`id:${Challenges[challenge].id} | ${Challenges[challenge].name}\n`);
         }
       }
     }
 
-    if (easy.length !== 0) msg2 += "\nEASY\n";
-    for (const text in easy) {
-      msg2 += easy[text];
-    }
-    if (medium.length !== 0) msg2 += "\nMEDIUM\n";
-    for (const text in medium) {
-      msg2 += medium[text];
-    }
-    if (hard.length !== 0) msg2 += "\nHARD\n";
-    for (const text in hard) {
-      msg2 += hard[text];
-    }
-    if (impossibile.length !== 0) msg2 += "\nIMPOSSIBILE\n";
-    for (const text in impossibile) {
-      msg2 += impossibile[text];
+
+    let easyCompletedMsg: string = null;
+    let hardCompletedMsg: string = null;
+    let mediumCompletedMsg: string = null;
+    let impossibleCompletedMsg: string = null;
+    let easyMissingMsg: string = null;
+    let mediumMissingMsg: string = null;
+    let hardMissingMsg: string = null;
+    let impossibleMissingMsg: string = null;
+
+
+    // Format and save all messages for completed challenges.
+    if(easyCompleted.length !== 0){
+      easyCompletedMsg = "**EASY CHALLENGES**\n```";
+      for (const challenge in easyCompleted) {
+        easyCompletedMsg += easyCompleted[challenge] + "\n";
+      }
+      easyCompletedMsg += "```";
     }
 
-    msg2 += "```\n\n\n `TOTAL POINTS:` " + points;
+    if(mediumCompleted.length !== 0){
+      mediumCompletedMsg = "**MEDIUM CHALLENGES**\n```";
+      for (const challenge in mediumCompleted) {
+        mediumCompletedMsg += mediumCompleted[challenge] + "\n";
+      }
+      mediumCompletedMsg += "```";
+    }
 
-    message.channel.send(msg1);
-    message.channel.send(msg2);
+    if(hardCompleted.length !== 0){
+      hardCompletedMsg = "**HARD CHALLENGES**\n```";
+      for (const challenge in hardCompleted) {
+        hardCompletedMsg += hardCompleted[challenge] + "\n";
+      }
+      hardCompletedMsg += "```";
+    }
+
+    if(impossibleCompleted.length !== 0){
+      impossibleCompletedMsg = "**IMPOSSIBLE CHALLENGES**\n```";
+      for (const challenge in impossibleCompleted) {
+        impossibleCompletedMsg += impossibleCompleted[challenge] + "\n";
+      }
+      impossibleCompletedMsg += "```";
+    }
+
+    // Format and save all messages for missing challenges.
+    
+    if(easyMissing.length !== 0){
+      easyMissingMsg = "**EASY CHALLENGES**\n```";
+      for (const challenge in easyMissing) {
+        easyMissingMsg += easyMissing[challenge] + "\n";
+      }
+      easyMissingMsg += "```";
+    }
+
+    if(mediumMissing.length !== 0){
+      mediumMissingMsg = "**MEDIUM CHALLENGES**\n```";
+      for (const challenge in mediumMissing) {
+        mediumMissingMsg += mediumMissing[challenge] + "\n";
+      }
+      mediumMissingMsg += "```";
+    }
+
+    if(hardMissing.length !== 0){
+      hardMissingMsg = "**HARD CHALLENGES**\n```";
+      for (const challenge in hardMissing) {
+        hardMissingMsg += hardMissing[challenge] + "\n";
+      }
+      hardMissingMsg += "```";
+    }
+
+    if(impossibleMissing.length !== 0){
+      impossibleMissingMsg = "**IMPOSSIBLE CHALLENGES**\n```";
+      for (const challenge in impossibleMissing) {
+        impossibleMissingMsg += impossibleMissing[challenge] + "\n";
+      }
+      impossibleMissingMsg += "```";
+    }
+
+    // Send Messages
+    await message.channel.send(`**Completed challenges for <@${discordID}>**`)
+
+    if(easyCompletedMsg !== null)
+    await message.channel.send(easyCompletedMsg);
+
+    if(mediumCompletedMsg !== null)
+    await message.channel.send(mediumCompletedMsg);
+
+    if(hardCompletedMsg !== null)
+    await message.channel.send(hardCompletedMsg);
+
+    if(impossibleCompletedMsg !== null)
+    await message.channel.send(impossibleCompletedMsg);
+
+    await message.channel.send(`**Missing Challenges**`);
+
+    if(easyMissingMsg !== null)
+    await message.channel.send(easyMissingMsg);
+
+    if(mediumMissingMsg !== null)
+    await message.channel.send(mediumMissingMsg);
+
+    if(hardMissingMsg !== null)
+    await message.channel.send(hardMissingMsg);
+
+    if(impossibleMissingMsg !== null)
+    await message.channel.send(impossibleMissingMsg);
+
+    ogMsg.delete();
     return;
   },
 };
