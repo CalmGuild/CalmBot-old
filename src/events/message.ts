@@ -7,7 +7,7 @@ module.exports = async function message(client: DiscordClient, message: Message)
   if (message.guild === null) return;
   if (!message.guild.id) return;
 
-  if (!message.content.startsWith(client.prefix)) return;
+  if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 
   let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
   if (guildSettings === null) {
