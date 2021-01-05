@@ -4,7 +4,7 @@
     "dev": "nodemon src/bot.ts"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "mongoose": "^5.11.6",
