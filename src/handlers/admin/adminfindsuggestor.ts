@@ -25,8 +25,11 @@ export default {
 
     let embed = new MessageEmbed()
       .setTitle("Suggestion id: " + id)
-      .addField("User", suggestor.suggestorTag, true)
-      .addField("User ID", suggestor.suggestorID);
+      .addField("User", suggestor.suggestorTag)
+      .addField("Suggestion", suggestor.suggestion)
+      .addField("User ID", suggestor.suggestorID)
+      .setColor("#4287f5");
+
     message.channel.send(embed);
   },
 };

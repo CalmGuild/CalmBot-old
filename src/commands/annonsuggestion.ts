@@ -48,7 +48,7 @@ module.exports = {
     suggestionChannel.send(suggestionEmbed).then(m =>{
       m.react(firstReaction);
       m.react(secondReaction);
-      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag });
+      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion });
       guildSettings.save();
     })
   },
