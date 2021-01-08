@@ -36,7 +36,7 @@
       "public": true
     }
   },
-  "IMPORATNT": {
+  "IMPORTANT": {
     "NEWS": {
       "name": "news",
       "id": "607422034925846538",
@@ -156,11 +156,6 @@
     "SKYBLOCK_CHAT": {
       "name": "skyblock-chat",
       "id": "737090276837031986",
-      "public": true
-    },
-    "PROGRAMMING_TALK": {
-      "name": "programming-talk",
-      "id": "758768983058284614",
       "public": true
     },
     "INTRODUCTIONS": {
