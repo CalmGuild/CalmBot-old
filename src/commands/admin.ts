@@ -5,6 +5,8 @@ import admindisablecommand from "../handlers/admin/admindisablecommand";
 import adminenablecommand from "../handlers/admin/adminenablecommand";
 import adminsleep from "../handlers/admin/adminsleep";
 import admincommand from "../handlers/admin/admincommand";
+import adminfindsuggestor from "../handlers/admin/adminfindsuggestor";
+
 const Roles = require("../data/calm/roles.json");
 module.exports = {
   name: "admin",
@@ -17,7 +19,6 @@ module.exports = {
     } else {
       srOfficerRole = message.guild.roles.cache.find((r) => r.name === Roles.GENERAL.SR_OFFICER.name);
     }
-    console.log(srOfficerRole);
 
     // I know this ugly af but i was lazy 
     if (srOfficerRole !== null) {
@@ -56,6 +57,8 @@ module.exports = {
       adminsleep.run(client, message, args);
     } else if (args[0] === "command") {
       admincommand.run(client, message, args);
+    } else if (args[0] === "findsuggestor") {
+      adminfindsuggestor.run(client, message, args);
     }
   },
 };

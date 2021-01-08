@@ -1,5 +1,6 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
+import GuildSettings from "../schemas/GuildSettings";
 
 const Channels = require("../data/calm/channels.json");
 module.exports = {
@@ -35,9 +36,20 @@ module.exports = {
     const suggestionEmbed = new MessageEmbed().setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL()).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
 
     message.channel.send("Thanks for the suggestion! \n**Check it out: <#" + suggestionChannel.id + ">**");
+
+    let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
+    if (guildSettings === null) {
+      const doc = new GuildSettings({ guildID: message.guild.id });
+      await doc.save();
+      guildSettings = doc;
+    }
+
     suggestionChannel.send(suggestionEmbed).then(m =>{
       m.react(firstReaction);
       m.react(secondReaction);
+
+      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag});
+      guildSettings.save();
     })
   },
 };

@@ -1,6 +1,6 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
-
+import GuildSettings from "../schemas/GuildSettings";
 const Channels = require("../data/calm/channels.json");
 module.exports = {
   name: "annonsuggestion",
@@ -37,13 +37,19 @@ module.exports = {
 
     // Delete message so people can not see who made suggestion
     message.delete();
-
-    // Log to console just incase someone does c!annonsuggestion (insert 5 slurs here)
-    console.log(`ANNON SUGGESTION FROM: ${message.author.username}#${message.author.tag} | SUGGESTION: ${suggestion} | TIME: ${new Date().getTime()}`);
+    
+    let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
+    if (guildSettings === null) {
+      const doc = new GuildSettings({ guildID: message.guild.id });
+      await doc.save();
+      guildSettings = doc;
+    }
     
     suggestionChannel.send(suggestionEmbed).then(m =>{
       m.react(firstReaction);
       m.react(secondReaction);
+      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag });
+      guildSettings.save();
     })
   },
 };
