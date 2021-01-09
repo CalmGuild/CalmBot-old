@@ -4,6 +4,14 @@
       "name": "Staff Team",
       "id": "626858736287350784"
     },
+    "DISCORD_STAFF": {
+      "name": "Discord Staff",
+      "id": "769723745640120401"
+    },
+    "MANAGEMENT_TEAM": {
+      "name": "Management Team",
+      "id": "626858733418315776"
+    },
     "INACTIVE": {
       "name": "Inactive",
       "id": "591346583501668358"
