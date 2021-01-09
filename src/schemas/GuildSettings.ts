@@ -4,6 +4,7 @@ export interface IGuildSettings extends Document {
   disabledCommands: Array<string>;
   verbals: Array<any>;
   punishmentcases: number;
+  suggestions: Array<any>;
   sleep: Boolean;
 }
 
@@ -13,6 +14,7 @@ const GuildSettingsScema = new Schema({
   verbals: { type: Array<any>(), default: new Array<any>() },
   punishmentcases: {type: Number, default: 1},
   sleep: { type: Boolean, default: false },
+  suggestions: {type: Array<any>(), default: new Array<any>()},
 });
 
 export default model<IGuildSettings>("GuildSettings", GuildSettingsScema);

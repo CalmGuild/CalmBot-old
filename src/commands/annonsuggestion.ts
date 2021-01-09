@@ -1,15 +1,14 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
 import GuildSettings from "../schemas/GuildSettings";
-
 const Channels = require("../data/calm/channels.json");
 module.exports = {
-  name: "suggest",
-  description: "Make a suggestion for the server!",
+  name: "annonsuggestion",
+  description: "Make a completely anonymous suggestion for the server!",
   category: "Utility",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     if (args.length === 0) {
-      message.channel.send("Invalid arguments! Please do c!suggest (suggestion)");
+      message.channel.send("Invalid arguments! Please do c!annonsuggestion (suggestion)");
       return;
     }
 
@@ -33,22 +32,23 @@ module.exports = {
       return;
     }
 
-    const suggestionEmbed = new MessageEmbed().setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL()).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
+    const suggestionEmbed = new MessageEmbed().setFooter(`Anonymous Suggestion • CalmBot v${client.version}`).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
 
-    message.channel.send("Thanks for the suggestion! \n**Check it out: <#" + suggestionChannel.id + ">**");
 
+    // Delete message so people can not see who made suggestion
+    message.delete();
+    
     let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
     if (guildSettings === null) {
       const doc = new GuildSettings({ guildID: message.guild.id });
       await doc.save();
       guildSettings = doc;
     }
-
+    
     suggestionChannel.send(suggestionEmbed).then(m =>{
       m.react(firstReaction);
       m.react(secondReaction);
-
-      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion});
+      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion });
       guildSettings.save();
     })
   },
