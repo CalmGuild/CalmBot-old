@@ -102,7 +102,7 @@
     "CHALLENGE_SUGGESTIONS": {
       "name": "challenge-suggestions",
       "id": "684861975028826132",
-      "public": false
+      "public": true
     }
   },
   "COMMUNITY": {

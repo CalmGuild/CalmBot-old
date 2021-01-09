@@ -1,6 +1,7 @@
 import { Message, Role, TextChannel } from "discord.js";
 import Client from "../structures/Client";
-import channels from "../data/calm/channels.json";
+const channels = require("../data/calm/channels.json");
+const roles = require("../data/calm/roles.json");
 
 module.exports = {
   name: "lockdown",
@@ -24,17 +25,21 @@ module.exports = {
     // Gets the Guild Member Role, Nitro booster role, and the news channel.
     let guildMemberRole: Role, nitroBoosterRole: Role, newsChannel: TextChannel;
     if (message.guild.id === "501501905508237312") {
-      guildMemberRole = message.guild.roles.cache.get("501504002853306388");
-      nitroBoosterRole = message.guild.roles.cache.get("501504002853306388");
+      guildMemberRole = message.guild.roles.cache.get(roles.GENERAL.CALMIES.id);
+      nitroBoosterRole = message.guild.roles.cache.get(roles.GENERAL.NITRO_BOOSTER.id);
       newsChannel = message.guild.channels.cache.find((chan) => chan.id === channels.IMPORTANT.NEWS.id) as TextChannel;
     } else {
-      guildMemberRole = message.guild.roles.cache.find((role) => role.name === "Calmies");
-      nitroBoosterRole = message.guild.roles.cache.find((role) => role.name === "Nitro Booster");
+      guildMemberRole = message.guild.roles.cache.find((role) => role.name === roles.GENERAL.CALMIES.name);
+      nitroBoosterRole = message.guild.roles.cache.find((role) => role.name === roles.GENERAL.NITRO_BOOSTER.name);
       newsChannel = message.guild.channels.cache.find((chan) => chan.name === channels.IMPORTANT.NEWS.name) as TextChannel;
     }
 
+    if(guildMemberRole === undefined || nitroBoosterRole === undefined) {
+      return message.channel.send("Unable to find one or more roles. Please make sure the Guild Member role exists and the Nitro Booster role exists")
+    }
+
     if (newsChannel) {
-      newsChannel.send(
+      await newsChannel.send(
         `**Attention,** \n<@${message.author.id}> has **initiated** a _server lockdown_. \nYou are **not muted**, but will not be able to talk until a server admin does \`c!unlock\``
       );
     }
