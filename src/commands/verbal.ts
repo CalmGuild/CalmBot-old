@@ -10,7 +10,7 @@ module.exports = {
   description: "Moderation Command.",
   category: "Moderation",
   run: async function run(client: Client, message: Message, args: Array<String>) {
-    // c!verbal (add, remove, info) (userid, casenumber) [reason]
+    // c!verbal (add, remove, info) (userid, casenumber) (reason) (attached image)
     if (!(await isMod(message.member))) return message.channel.send("Missing permissions.");
 
     let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
@@ -33,32 +33,27 @@ module.exports = {
     args[0] = args[0].toLowerCase();
     if (args[0] === "add") {
       // c!verbal add (userid) [reason]
-      if (args.length < 2) return message.channel.send("Invalid Arguments. Example: c!verbal add (userid) (reason) | Reason can be attached image or text");
-      if (!attachIsImage(message.attachments.array()[0]) && args.length < 3) return message.channel.send("Invalid arguments. Please provide reasoning in form of attached image or text.");
-      let reasonIsImage: boolean = false;
-      if (attachIsImage(message.attachments.array()[0])) reasonIsImage = true;
+      if (args.length < 2) return message.channel.send("Invalid Arguments. Example: c!verbal add (userid) (reason) (attached image)");
+      if (!attachIsImage(message.attachments.array()[0])) return message.channel.send("Invalid arguments. Please provide reasoning as text and evidence as an attached image.");
+      if(args.length < 3) return message.channel.send("Invalid arguments. Please provide reasoning as text and evidence as an attached image.");
 
       const id = args[1];
 
       let reason: string = "";
-      if (!reasonIsImage) {
-        for (let i = 2; i < args.length; i++) {
-          reason += args[i] + " ";
-        }
-        // Remove extra space
-        reason.substring(0, reason.length - 1);
-      } else {
-        reason = message.attachments.array()[0].url;
+      let imgurl = message.attachments.array()[0].url;
+      for (let i = 2; i < args.length; i++) {
+        reason += args[i] + " ";
       }
+      // Remove extra space
+      reason.substring(0, reason.length - 1);
 
       let member: GuildMember = await getMember(id as string, message.guild);
       if (member === undefined) return message.channel.send(`Could not find user with id: ${id}`);
 
-      if (reason.length > 1020) return message.channel.send("Your reason is too long. Either attach an image or give text that is < 1020 characters (due to discord embed limitations)");
+      if (reason.length > 1020) return message.channel.send("Your reason is too long. Attach an image and give text that is < 1020 characters (due to discord embed limitations)");
 
       const casenumber = guildSettings.punishmentcases;
-      if (reasonIsImage) guildSettings.verbals.push({ moderator: message.author.id, user: member.id, reasonImage: reason, casenumber: casenumber });
-      else guildSettings.verbals.push({ moderator: message.author.id, user: member.id, reasonText: reason, casenumber: casenumber });
+      guildSettings.verbals.push({ moderator: message.author.id, user: member.id, reasonText: reason, reasonImage: imgurl, casenumber: casenumber });
       guildSettings.punishmentcases = guildSettings.punishmentcases + 1;
       await guildSettings.save();
 
@@ -102,12 +97,8 @@ module.exports = {
 
         embed.addField("Case number: ", warning.casenumber, true);
         embed.addField("Moderator: ", modtext);
-
-        if (warning.reasonImage !== undefined) {
-          embed.setImage(warning.reasonImage);
-        } else {
-          embed.addField("Reason: ", warning.reasonText);
-        }
+        if (warning.reasonText !== undefined) embed.addField("Reason: ", warning.reasonText);
+        if (warning.reasonImage !== undefined) embed.setImage(warning.reasonImage);
 
         await message.channel.send(embed);
       });
@@ -115,7 +106,7 @@ module.exports = {
       const embed = new MessageEmbed()
         .setTitle("Verbal Warning Command:")
         .addField("c!verbal", "Shows some verbal warning information.")
-        .addField("c!verbal add (discord-id) (reason, either attached image or text)", "Adds a verbal warning to a user and assigns it a case number.")
+        .addField("c!verbal add (discord-id) (reason) (attached-image)", "Adds a verbal warning to a user and assigns it a case number.")
         .addField("c!verbal remove (case-id)", "Removes a verbal warnings.")
         .addField("c!verbal info (user-id)", "Get all verbal warnings for a specific user.")
         .addField("c!verbal help", "Shows this message.")
@@ -123,7 +114,7 @@ module.exports = {
         .setColor("#17c1eb");
       return message.channel.send(embed);
     } else if (args[0] === "flush") {
-      if(!message.member.hasPermission(["ADMINISTRATOR"])) {
+      if (!message.member.hasPermission(["ADMINISTRATOR"])) {
         return message.channel.send("Missing Permissions.\nREQUIRED: **ADMINISTRATOR**");
       }
       guildSettings.verbals = [];
