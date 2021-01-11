@@ -93,7 +93,7 @@ module.exports = {
 
         let modtext = warning.moderator;
         const mod = await getMember(warning.moderator, message.guild);
-        if (mod !== undefined) membertext = member.user.tag;
+        if (mod !== undefined) modtext = mod.user.tag;
 
         embed.addField("Case number: ", warning.casenumber, true);
         embed.addField("Moderator: ", modtext);
@@ -119,7 +119,7 @@ module.exports = {
 
       let modtext = warning.moderator;
       const mod = await getMember(warning.moderator, message.guild);
-      if (mod !== undefined) membertext = member.user.tag;
+      if (mod !== undefined) modtext = mod.user.tag;
 
       embed.addField("User:", membertext);
       embed.addField("Moderator:", modtext);
