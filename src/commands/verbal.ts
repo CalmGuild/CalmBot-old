@@ -35,7 +35,7 @@ module.exports = {
       // c!verbal add (userid) [reason]
       if (args.length < 2) return message.channel.send("Invalid Arguments. Example: c!verbal add (userid) (reason) (attached image)");
       if (!attachIsImage(message.attachments.array()[0])) return message.channel.send("Invalid arguments. Please provide reasoning as text and evidence as an attached image.");
-      if(args.length < 3) return message.channel.send("Invalid arguments. Please provide reasoning as text and evidence as an attached image.");
+      if (args.length < 3) return message.channel.send("Invalid arguments. Please provide reasoning as text and evidence as an attached image.");
 
       const id = args[1];
 
@@ -93,7 +93,7 @@ module.exports = {
 
         let modtext = warning.moderator;
         const mod = await getMember(warning.moderator, message.guild);
-        if (member !== undefined) membertext = member.user.tag;
+        if (mod !== undefined) membertext = member.user.tag;
 
         embed.addField("Case number: ", warning.casenumber, true);
         embed.addField("Moderator: ", modtext);
@@ -102,6 +102,31 @@ module.exports = {
 
         await message.channel.send(embed);
       });
+    } else if (args[0] === "case") {
+      // c!verbal info (caseid)
+      if (args.length < 2) return message.channel.send("Invalid Arguments. Example: c!verbal case (caseid)");
+      const warning = await getWarningFromCase(message.guild.id, args[1] as string);
+
+      if (warning === undefined) return message.channel.send("Could not find an active or inactive verbal with caseid " + args[1]);
+
+      let embed = new MessageEmbed();
+      embed.setTitle("Case Number: " + args[1]);
+      embed.setColor("#eb1717");
+
+      let membertext = warning.user;
+      const member = await getMember(warning.user as string, message.guild);
+      if (member !== undefined) membertext = member.user.tag;
+
+      let modtext = warning.moderator;
+      const mod = await getMember(warning.moderator, message.guild);
+      if (mod !== undefined) membertext = member.user.tag;
+
+      embed.addField("User:", membertext);
+      embed.addField("Moderator:", modtext);
+      if (warning.reasonText !== undefined) embed.addField("Reason: ", warning.reasonText);
+      if (warning.reasonImage !== undefined) embed.setImage(warning.reasonImage);
+
+      return message.channel.send(embed);
     } else if (args[0] === "help") {
       const embed = new MessageEmbed()
         .setTitle("Verbal Warning Command:")
@@ -174,4 +199,15 @@ async function getMember(id: string, guild: Guild) {
     return undefined;
   }
   return member;
+}
+
+async function getWarningFromCase(guildID: string, caseID: string) {
+  let guildSettings = await GuildSettings.findOne({ guildID: guildID });
+  let warning: any;
+  guildSettings.verbals.forEach((element) => {
+    if ((element.casenumber.toString() as string) === caseID) {
+      warning = element;
+    }
+  });
+  return warning;
 }
