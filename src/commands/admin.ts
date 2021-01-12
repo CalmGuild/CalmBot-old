@@ -6,6 +6,7 @@ import adminenablecommand from "../handlers/admin/adminenablecommand";
 import adminsleep from "../handlers/admin/adminsleep";
 import admincommand from "../handlers/admin/admincommand";
 import adminfindsuggestor from "../handlers/admin/adminfindsuggestor";
+import adminsay from "../handlers/admin/adminsay";
 
 const Roles = require("../data/calm/roles.json");
 module.exports = {
@@ -59,6 +60,8 @@ module.exports = {
       admincommand.run(client, message, args);
     } else if (args[0] === "findsuggestor") {
       adminfindsuggestor.run(client, message, args);
+    } else if (args[0] === "say") {
+      adminsay.run(client, message, args)
     }
   },
 };

@@ -8,7 +8,7 @@ const readdir = promisify(fs.readdir);
 
 export default class Client extends Discord.Client {
   prefix = "c!";
-  version = "2.10.2";
+  version = "2.10.3";
   commands = new Map();
 
   constructor() {
