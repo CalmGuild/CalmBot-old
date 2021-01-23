@@ -2,9 +2,7 @@ import { Message, TextChannel } from "discord.js";
 import DiscordClient from "../structures/Client";
 import GuildSettings from "../schemas/GuildSettings";
 module.exports = async function message(client: DiscordClient, message: Message) {
-  if (message.author.bot) return;
-  if (message.guild === null) return;
-  if (!message.guild.id) return;
+  if (message.author.bot || message.channel.type === "dm") return;
 
   // #count-to-x channel code so invalid numbers are deleted and channel name is updated
   let currentChannel = message.channel as TextChannel;
@@ -28,7 +26,7 @@ module.exports = async function message(client: DiscordClient, message: Message)
     if (currentCount % 1000 === 0) {
       return currentChannel.setName(`count-to-${Math.floor((currentCount + 1000) / 1000)}k`);
     }
-  }
+  } // End count-to code.
 
   if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 
@@ -46,7 +44,11 @@ module.exports = async function message(client: DiscordClient, message: Message)
 
   const command = args.shift().toLowerCase();
 
-  const cmd = client.commands.get(command);
+  let cmd: any = client.commands.get(command);
+  if (!cmd) {
+    cmd = client.aliases.get(command);
+  }
+  if (!cmd) return;
   if (cmd) {
     if (guildSettings.disabledCommands.includes(cmd.name)) return;
     if (cmd.name !== "admin" && guildSettings.sleep) return message.channel.send("Bot is in sleep mode! Do c!admin sleep to turn it back on!");
@@ -54,6 +56,14 @@ module.exports = async function message(client: DiscordClient, message: Message)
     // Temporary disable of all commands in Calm #general Channel
     if (message.guild.id === "501501905508237312" && message.channel.id === "501501905508237315") {
       return;
+    }
+    if (cmd.permissions) {
+      let missingPerms = [];
+      missingPerms = cmd.permissions.filter((permission) => !message.member.hasPermission(permission));
+      if (missingPerms.length)
+        return message.channel.send(
+          `You are missing the following permissions required to run this command: ${missingPerms.map((x) => `\`${x}\``).join(", ")}`
+        );
     }
     cmd.run(client, message, args);
   }
