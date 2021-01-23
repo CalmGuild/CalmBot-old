@@ -3,8 +3,10 @@ import Client from "../structures/Client";
 
 module.exports = {
   name: "botinfo",
+  aliases: ["credits", "github", "source"],
   description: "Information about CalmBot",
   category: "Information",
+  usage: "botinfo",
   run: async function run(client: Client, message: Message) {
     // Uptime Calculations:
     let daysUp = Math.floor(client.uptime / 86400000);

@@ -4,8 +4,10 @@ import channels from "../data/calm/channels.json";
 
 module.exports = {
   name: "birthday",
+  aliases: ["bb", "birthdays"],
   description: "Explains how to set your birthday",
   category: "Information",
+  usage: "birthday",
   run: async function run(client: Client, message: Message) {
     let commandsChannel: TextChannel;
 

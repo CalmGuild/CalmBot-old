@@ -5,13 +5,11 @@ import Channels from "../data/calm/channels.json";
 module.exports = {
   name: "approvesuggestion",
   description: "Approve a suggestion!",
-  category: "Admin",
+  category: "Administration",
+  permissions: ["ADMINISTRATOR"],
+  usage: "approvesuggestion <message id>",
   run: async function run(client: Client, message: Message, args: Array<string>) {
-    // Basic checks: Adminstrator Permission; no args provided; suggestions channel
-    if (!message.member.hasPermission("ADMINISTRATOR")) {
-      message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
-      return;
-    }
+    // Basic checks: no args provided; suggestions channel
 
     if (args.length === 0) return message.channel.send("Missing Arguments.\n**Usage:** `c!approvesuggestion [message id]`");
 

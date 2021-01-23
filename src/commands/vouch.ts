@@ -4,8 +4,10 @@ import channels from "../data/calm/channels.json";
 
 module.exports = {
   name: "vouch",
+  aliases: ["vouching", "vouchsystem"],
   description: "Explains our vouching system!",
   category: "Information",
+  usage: "vouch",
   run: async function run(client: Client, message: Message) {
     let commandsChannel: TextChannel, infoChannel: TextChannel;
 
@@ -16,7 +18,7 @@ module.exports = {
       commandsChannel = message.guild.channels.cache.find((chan) => chan.name === channels.COMMUNITY.COMMANDS.name) as TextChannel;
       infoChannel = message.guild.channels.cache.find((chan) => chan.name === channels.UPON_JOINING.INFO.name) as TextChannel;
     }
-    if (!commandsChannel) {
+    if (!commandsChannel || !infoChannel) {
       return message.reply("we could not find the commands / info channel!");
     }
 

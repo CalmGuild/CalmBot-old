@@ -5,7 +5,9 @@ import Channels from "../data/calm/channels.json";
 module.exports = {
   name: "denysuggestion",
   description: "Denies a suggestion!",
-  category: "Admin",
+  category: "Administration",
+  permissions: ["ADMINISTRATOR"],
+  usage: "denysuggestion <message id>",
   run: async function run(client: Client, message: Message, args: Array<string>) {
     // Basic checks: Adminstrator Permission; no args provided; suggestions channel
     if (!message.member.hasPermission("ADMINISTRATOR")) {

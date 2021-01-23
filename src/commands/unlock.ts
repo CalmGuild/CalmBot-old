@@ -5,12 +5,10 @@ import channels from "../data/calm/channels.json";
 module.exports = {
   name: "unlock",
   description: "Unlocks the server",
-  category: "Admin",
+  category: "Administration",
+  permissions: ["ADMINISTRATOR"],
+  usage: "unlock [full]",
   run: async function run(client: Client, message: Message, args: Array<String>) {
-    // Check for ADMINISTRATOR permission
-    if (!message.member.hasPermission("ADMINISTRATOR")) {
-      return message.reply("You are missing the `ADMINISTRATOR` permission.");
-    }
     // Check if full lockdown, or just a normal one.
     let fullLock: boolean;
     if (args[0] == "full") {

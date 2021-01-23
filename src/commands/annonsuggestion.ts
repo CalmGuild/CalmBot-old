@@ -4,8 +4,10 @@ import GuildSettings from "../schemas/GuildSettings";
 const Channels = require("../data/calm/channels.json");
 module.exports = {
   name: "annonsuggestion",
+  aliases: ["anonsuggestion", "anonsuggest"],
   description: "Make a completely anonymous suggestion for the server!",
   category: "Utility",
+  usage: "annonsuggestion <suggestion>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     if (args.length === 0) {
       message.channel.send("Invalid arguments! Please do c!annonsuggestion (suggestion)");

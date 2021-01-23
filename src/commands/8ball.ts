@@ -28,6 +28,7 @@ module.exports = {
   name: "8ball",
   description: "Ask the Magic 8Ball a question",
   category: "Fun",
+  usage: "8ball <question>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     if (args.length === 0) {
       message.channel.send("Please ask a question!");

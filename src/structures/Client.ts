@@ -8,8 +8,9 @@ const readdir = promisify(fs.readdir);
 
 export default class Client extends Discord.Client {
   prefix = "c!";
-  version = "2.11.1";
-  commands = new Map();
+  version = "2.12.1";
+  commands = new Discord.Collection();
+  aliases = new Discord.Collection();
 
   constructor() {
     super({
@@ -42,8 +43,13 @@ export default class Client extends Discord.Client {
       const commandName = file.split(".")[0];
       const command = require(path.join(commandsDir, file));
       this.commands.set(commandName, command);
+      if (command.aliases) {
+        command.aliases.forEach((alias: any) => {
+            this.aliases.set(alias, command)
+        })
+    }
 
-      console.log(`Loaded command: ${commandName}`);
+      console.log(`Loaded command: ${commandName} ${command.aliases ? `with aliases: ${command.aliases.join(", ")}` : ""}`);
     });
   }
 }

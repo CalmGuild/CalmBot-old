@@ -3,8 +3,10 @@ import Client from "../structures/Client";
 
 module.exports = {
   name: "socials",
+  aliases: ["social", "socialmedia"],
   description: "Sends Guild social media, as well as the Guild Master's",
   category: "Information",
+  usage: "socials",
   run: async function run(client: Client, message: Message) {
     const social =
       '**Calm Social Media**\n' +

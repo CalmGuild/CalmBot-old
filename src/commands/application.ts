@@ -4,8 +4,10 @@ import channels from "../data/calm/channels.json";
 
 module.exports = {
   name: "application",
+  aliases: ["app", "joinguild"],
   description: "Sends the link to join CalmGuild!",
   category: "Information",
+  usage: "application",
   run: async function run(client: Client, message: Message) {
     let infoChannel: TextChannel;
     if (message.guild.id === "501501905508237312") {
