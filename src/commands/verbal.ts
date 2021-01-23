@@ -7,8 +7,10 @@ const staffRoles = [Roles.GENERAL.STAFF_TEAM, Roles.GENERAL.DISCORD_STAFF, Roles
 
 module.exports = {
   name: "verbal",
-  description: "Moderation Command.",
+  aliases: ["verbalwarn"],
+  description: "Issue a verbal warning",
   category: "Moderation",
+  usage: "verbal <add/remove/info/help/flush>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     // c!verbal (add, remove, info) (userid, casenumber) (reason) (attached image)
     if (!(await isMod(message.member))) return message.channel.send("Missing permissions.");

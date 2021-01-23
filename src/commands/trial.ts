@@ -5,6 +5,7 @@ module.exports = {
   name: "trial",
   description: "Information about becoming a trial officer",
   category: "Information",
+  usage: "trial",
   run: async function run(client: Client, message: Message) {
     const trialInfo =
       'So you want to become Calm staff?? Awesome!!!\n\n' +

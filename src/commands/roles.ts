@@ -6,6 +6,7 @@ module.exports = {
   name: "roles",
   description: "General information about roles",
   category: "Information",
+  usage: "roles",
   run: async function run(client: Client, message: Message) {
     let selfRolesChannel: TextChannel, roleInfo: TextChannel;
     if (message.guild.id === "501501905508237312") {

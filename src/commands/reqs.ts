@@ -4,8 +4,10 @@ import channels from "../data/calm/channels.json";
 
 module.exports = {
   name: "reqs",
+  aliases: ["requirements"],
   description: "Displays current guild requirements",
   category: "Information",
+  usage: "reqs",
   run: async function run(client: Client, message: Message) {
     let infoChannel: TextChannel;
     if (message.guild.id === "501501905508237312") {

@@ -11,8 +11,10 @@ import adminsay from "../handlers/admin/adminsay";
 const Roles = require("../data/calm/roles.json");
 module.exports = {
   name: "admin",
+  aliases: ["administrator"],
   description: "For admin use only",
-  category: "Admin",
+  category: "Administration",
+  usage: "admin <manualchallenge/disablecommand/enablecommand/sleep/command/findsuggestor/say>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     let srOfficerRole: Role;
     if (message.guild.id === "501501905508237312") {
@@ -21,8 +23,8 @@ module.exports = {
       srOfficerRole = message.guild.roles.cache.find((r) => r.name === Roles.GENERAL.SR_OFFICER.name);
     }
 
-    // I know this ugly af but i was lazy 
-    if (srOfficerRole !== null) {
+    // I know this ugly af but i was lazy
+    if (!srOfficerRole) {
       if (message.guild.id !== "501501905508237312") {
         if (!message.member.hasPermission(["ADMINISTRATOR"]) && message.member.roles.cache.find((r) => r.id === srOfficerRole.id) === undefined) {
           return message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
@@ -61,7 +63,7 @@ module.exports = {
     } else if (args[0] === "findsuggestor") {
       adminfindsuggestor.run(client, message, args);
     } else if (args[0] === "say") {
-      adminsay.run(client, message, args)
+      adminsay.run(client, message, args);
     }
   },
 };
