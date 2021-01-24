@@ -10,7 +10,7 @@ module.exports = {
   name: "uwu",
   description: "Uwuify text!",
   category: "Fun",
-  usage: "UWU <message>",
+  usage: "uwu <message>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     if (args.length == 0) {
       return message.channel.send("Invalid arguments. Please enter text to uwuify.");
