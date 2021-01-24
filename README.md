@@ -29,7 +29,7 @@
 
 5. Run `yarn --frozen-lockfile` to install all required packages
 
-6. Run `yarn start` to start the bot
+6. Run `yarn startbot` to start the bot
 
 Make sure to create a **bug report** in the form of a *feature request* before submitting any pull requests for new features. This will increase the chances of your pull request getting accepted!
   
