@@ -1,6 +1,6 @@
 import { Message, TextChannel } from "discord.js";
 import DiscordClient from "../structures/Client";
-import GuildSettings from "../schemas/GuildSettings";
+import Database from "../utils/database/Database";
 module.exports = async function message(client: DiscordClient, message: Message) {
   if (message.author.bot || message.channel.type === "dm") return;
 
@@ -30,15 +30,7 @@ module.exports = async function message(client: DiscordClient, message: Message)
 
   if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 
-  let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
-  if (guildSettings === null) {
-    if (message.guild === null) {
-      return message.channel.send("Oh crap! An internal error occured while trying to run that command. Please re-enter the command!");
-    }
-    const doc = new GuildSettings({ guildID: message.guild.id });
-    await doc.save();
-    guildSettings = doc;
-  }
+  let guildSettings = await Database.getGuildSettings(message.guild.id);
 
   const args = message.content.slice(client.prefix.length).trim().split(/ +/g);
 
@@ -60,10 +52,7 @@ module.exports = async function message(client: DiscordClient, message: Message)
     if (cmd.permissions) {
       let missingPerms = [];
       missingPerms = cmd.permissions.filter((permission) => !message.member.hasPermission(permission));
-      if (missingPerms.length)
-        return message.channel.send(
-          `You are missing the following permissions required to run this command: ${missingPerms.map((x) => `\`${x}\``).join(", ")}`
-        );
+      if (missingPerms.length) return message.channel.send(`You are missing the following permissions required to run this command: ${missingPerms.map((x) => `\`${x}\``).join(", ")}`);
     }
     cmd.run(client, message, args);
   }

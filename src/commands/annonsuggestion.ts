@@ -1,7 +1,7 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
-import GuildSettings from "../schemas/GuildSettings";
-const Channels = require("../data/calm/channels.json");
+import Database from "../utils/database/Database";
+import Channels from "../data/calm/channels.json";
 module.exports = {
   name: "annonsuggestion",
   aliases: ["anonsuggestion", "anonsuggest"],
@@ -36,22 +36,16 @@ module.exports = {
 
     const suggestionEmbed = new MessageEmbed().setFooter(`Anonymous Suggestion • CalmBot v${client.version}`).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
 
-
     // Delete message so people can not see who made suggestion
     message.delete();
-    
-    let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
-    if (guildSettings === null) {
-      const doc = new GuildSettings({ guildID: message.guild.id });
-      await doc.save();
-      guildSettings = doc;
-    }
-    
-    suggestionChannel.send(suggestionEmbed).then(m =>{
+
+    let guildSettings = await Database.getGuildSettings(message.guild.id);
+
+    suggestionChannel.send(suggestionEmbed).then((m) => {
       m.react(firstReaction);
       m.react(secondReaction);
-      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion });
+      guildSettings.suggestions.push({ msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion });
       guildSettings.save();
-    })
+    });
   },
 };

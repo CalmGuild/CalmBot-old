@@ -1,10 +1,10 @@
 import { Message } from "discord.js";
-import GuildSettings from "../../schemas/GuildSettings";
+import Database from "../../utils/database/Database";
 import Client from "../../structures/Client";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
-    let settings = await GuildSettings.findOne({ guildID: message.guild.id });
+    let settings = await Database.getGuildSettings(message.guild.id);
     if (settings.sleep) {
       settings.sleep = false;
       settings.save();

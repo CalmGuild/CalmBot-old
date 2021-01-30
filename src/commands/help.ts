@@ -65,18 +65,7 @@ module.exports = {
             .setTitle(`:question: Help - ${cmd.name} command`)
             .setColor("#007FFF")
             .setTimestamp()
-            .setDescription(
-              "Category: `" +
-                cmd.category +
-                "`\n Description: `" +
-                cmd.description +
-                "`\n Usage: `" +
-                client.prefix +
-                cmd.usage +
-                "`\n Aliases: `" +
-                aliasList +
-                `\`\n ${permissions}`
-            )
+            .setDescription("Category: `" + cmd.category + "`\n Description: `" + cmd.description + "`\n Usage: `" + client.prefix + cmd.usage + "`\n Aliases: `" + aliasList + `\`\n ${permissions}`)
             .setFooter(`Syntax: <> = required, [] = optional • CalmBot v${client.version}`, message.author.displayAvatarURL());
           message.channel.send(helpEmbed);
         }

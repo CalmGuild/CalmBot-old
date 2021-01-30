@@ -20,8 +20,6 @@ module.exports = {
       return message.reply("we could not find the self-assign-roles / role-info channel!");
     }
 
-    message.channel.send(
-      `Information on all roles can be found in ${roleInfo}\nYou want some of these roles? Go give yourself some in ${selfRolesChannel}!! <3`
-    );
+    message.channel.send(`Information on all roles can be found in ${roleInfo}\nYou want some of these roles? Go give yourself some in ${selfRolesChannel}!! <3`);
   },
 };

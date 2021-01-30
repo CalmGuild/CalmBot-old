@@ -1,7 +1,7 @@
-const Channels = require("../data/calm/channels.json");
-const Challenges = require("../data/calm/challenges/DecemberChallenges.json");
+import Channels from "../data/calm/channels.json";
+import Challenges from "../data/calm/challenges/DecemberChallenges.json";
 import Client from "../structures/Client";
-import ChallengeParticipant from "../schemas/ChallengeParticipant";
+import Database from "../utils/database/Database";
 import { MessageEmbed, Message, MessageAttachment } from "discord.js";
 
 import challengecheck from "../handlers/challenges/challengecheck";
@@ -48,12 +48,7 @@ module.exports = {
       return;
     }
 
-    let participant = await ChallengeParticipant.findOne({ discordID: message.author.id });
-    if (participant === null) {
-      const doc = new ChallengeParticipant({ discordID: message.author.id });
-      await doc.save();
-      participant = await ChallengeParticipant.findOne({ discordID: message.author.id });
-    }
+    let participant = await Database.getChallengeParticipant(message.author.id);
 
     if (participant.completedChallenges.get(id) === "true") {
       message.channel.send(`You have already completed challenge ${id}.`);

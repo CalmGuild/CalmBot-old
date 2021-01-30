@@ -1,8 +1,8 @@
-const Channels = require("../data/calm/channels.json");
-const Roles = require("../data/calm/roles.json");
+import Channels from "../data/calm/channels.json";
+import Roles from "../data/calm/roles.json";
 
 import Client from "../structures/Client";
-import ChallengeParticipant from "../schemas/ChallengeParticipant";
+import Database from "../utils/database/Database";
 import { MessageReaction, MessageEmbed, User, Message, TextChannel, Role, GuildChannel } from "discord.js";
 
 module.exports = async function messageReactionAdd(client: Client, reaction: MessageReaction, user: User) {
@@ -42,7 +42,7 @@ module.exports = async function messageReactionAdd(client: Client, reaction: Mes
     const userID = fields.find((f) => f.name.toLowerCase() === "user id:").value;
     const challengeID = fields.find((f) => f.name.toLowerCase() === "challenge id:").value;
 
-    let participant = await ChallengeParticipant.findOne({ discordID: userID });
+    let participant = await Database.getChallengeParticipant(userID);
     participant.completedChallenges.set(challengeID, "true");
     await participant.save();
 

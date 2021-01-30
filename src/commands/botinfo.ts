@@ -26,7 +26,6 @@ module.exports = {
         false
       )
       .addField("💻 Source Code:", "[CalmGuild GitHub Repo](https://github.com/CalmGuild/CalmBot)", false)
-      .addField("Users:", client.users.cache.size, true)
       .addField("Uptime:", `${daysUp} days, ${hoursUp} hours, ${minutesUp} minutes and ${secondsUp} seconds`, true);
 
     message.channel.send(botInfoEmbed);

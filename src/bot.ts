@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 import path from "path";
-import Client from "../src/structures/Client";
+import Client from "./structures/Client";
 
 const bot = new Client();
 

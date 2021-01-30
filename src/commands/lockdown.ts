@@ -1,7 +1,7 @@
 import { Message, Role, TextChannel } from "discord.js";
 import Client from "../structures/Client";
-const channels = require("../data/calm/channels.json");
-const roles = require("../data/calm/roles.json");
+import channels from "../data/calm/channels.json";
+import roles from "../data/calm/roles.json";
 
 module.exports = {
   name: "lockdown",

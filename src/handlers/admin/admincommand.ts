@@ -20,15 +20,19 @@ export default {
     const port = process.env.CALM_BOT_PORT;
     const key = process.env.CALM_BOT_KEY;
 
-axios.post("http://" + ip + ":" + port + "/chat", {
-  message: command,
-  key: key
-}).then((response) =>{
-  message.channel.send(`StatusCode: ${response.status} | StatusMessage: ${response.statusText}`)
-}, (error) => {
-  console.log(error);
-  message.channel.send("There was an error making that request!");
-})
-    
+    axios
+      .post("http://" + ip + ":" + port + "/chat", {
+        message: command,
+        key: key,
+      })
+      .then(
+        (response) => {
+          message.channel.send(`StatusCode: ${response.status} | StatusMessage: ${response.statusText}`);
+        },
+        (error) => {
+          console.log(error);
+          message.channel.send("There was an error making that request!");
+        }
+      );
   },
 };

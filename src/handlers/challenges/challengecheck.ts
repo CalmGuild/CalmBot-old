@@ -1,8 +1,8 @@
 import { Message, Role } from "discord.js";
 import Client from "../../structures/Client";
-import ChallengeParticipant from "../../schemas/ChallengeParticipant";
-const Challenges = require("../../data/calm/challenges/DecemberChallenges.json");
-const Roles = require("../../data/calm/roles.json");
+import Database from "../../utils/database/Database";
+import Challenges from "../../data/calm/challenges/DecemberChallenges.json";
+import Roles from "../../data/calm/roles.json";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
@@ -27,13 +27,15 @@ export default {
       discordID = args[1].toString();
     }
     if (discordID === null) discordID = message.author.id;
-    const participant = ChallengeParticipant.findOne({ discordID: discordID });
-    if ((await participant) === null) {
+    const participant = await Database.getChallengeParticipant(discordID);
+    if (participant === null) {
       message.channel.send("You/They have not done any challenges yet!");
       return;
     }
 
-    const ogMsg = await message.channel.send("**NOTE:** Due to issues with sending a message above 2K characters and crashing the bot multiple messages will be sent. Due to discord limitations this might take a little bit. Please be patient")
+    const ogMsg = await message.channel.send(
+      "**NOTE:** Due to issues with sending a message above 2K characters and crashing the bot multiple messages will be sent. Due to discord limitations this might take a little bit. Please be patient"
+    );
     let points = 0;
     let easyCompleted: Array<String> = [];
     let mediumCompleted: Array<String> = [];
@@ -78,7 +80,6 @@ export default {
       }
     }
 
-
     let easyCompletedMsg: string = null;
     let hardCompletedMsg: string = null;
     let mediumCompletedMsg: string = null;
@@ -88,9 +89,8 @@ export default {
     let hardMissingMsg: string = null;
     let impossibleMissingMsg: string = null;
 
-
     // Format and save all messages for completed challenges.
-    if(easyCompleted.length !== 0){
+    if (easyCompleted.length !== 0) {
       easyCompletedMsg = "**EASY CHALLENGES**\n```";
       for (const challenge in easyCompleted) {
         easyCompletedMsg += easyCompleted[challenge] + "\n";
@@ -98,7 +98,7 @@ export default {
       easyCompletedMsg += "```";
     }
 
-    if(mediumCompleted.length !== 0){
+    if (mediumCompleted.length !== 0) {
       mediumCompletedMsg = "**MEDIUM CHALLENGES**\n```";
       for (const challenge in mediumCompleted) {
         mediumCompletedMsg += mediumCompleted[challenge] + "\n";
@@ -106,7 +106,7 @@ export default {
       mediumCompletedMsg += "```";
     }
 
-    if(hardCompleted.length !== 0){
+    if (hardCompleted.length !== 0) {
       hardCompletedMsg = "**HARD CHALLENGES**\n```";
       for (const challenge in hardCompleted) {
         hardCompletedMsg += hardCompleted[challenge] + "\n";
@@ -114,7 +114,7 @@ export default {
       hardCompletedMsg += "```";
     }
 
-    if(impossibleCompleted.length !== 0){
+    if (impossibleCompleted.length !== 0) {
       impossibleCompletedMsg = "**IMPOSSIBLE CHALLENGES**\n```";
       for (const challenge in impossibleCompleted) {
         impossibleCompletedMsg += impossibleCompleted[challenge] + "\n";
@@ -123,8 +123,8 @@ export default {
     }
 
     // Format and save all messages for missing challenges.
-    
-    if(easyMissing.length !== 0){
+
+    if (easyMissing.length !== 0) {
       easyMissingMsg = "**EASY CHALLENGES**\n```";
       for (const challenge in easyMissing) {
         easyMissingMsg += easyMissing[challenge] + "\n";
@@ -132,7 +132,7 @@ export default {
       easyMissingMsg += "```";
     }
 
-    if(mediumMissing.length !== 0){
+    if (mediumMissing.length !== 0) {
       mediumMissingMsg = "**MEDIUM CHALLENGES**\n```";
       for (const challenge in mediumMissing) {
         mediumMissingMsg += mediumMissing[challenge] + "\n";
@@ -140,7 +140,7 @@ export default {
       mediumMissingMsg += "```";
     }
 
-    if(hardMissing.length !== 0){
+    if (hardMissing.length !== 0) {
       hardMissingMsg = "**HARD CHALLENGES**\n```";
       for (const challenge in hardMissing) {
         hardMissingMsg += hardMissing[challenge] + "\n";
@@ -148,7 +148,7 @@ export default {
       hardMissingMsg += "```";
     }
 
-    if(impossibleMissing.length !== 0){
+    if (impossibleMissing.length !== 0) {
       impossibleMissingMsg = "**IMPOSSIBLE CHALLENGES**\n```";
       for (const challenge in impossibleMissing) {
         impossibleMissingMsg += impossibleMissing[challenge] + "\n";
@@ -157,33 +157,25 @@ export default {
     }
 
     // Send Messages
-    await message.channel.send(`**Completed challenges for <@${discordID}>**`)
+    await message.channel.send(`**Completed challenges for <@${discordID}>**`);
 
-    if(easyCompletedMsg !== null)
-    await message.channel.send(easyCompletedMsg);
+    if (easyCompletedMsg !== null) await message.channel.send(easyCompletedMsg);
 
-    if(mediumCompletedMsg !== null)
-    await message.channel.send(mediumCompletedMsg);
+    if (mediumCompletedMsg !== null) await message.channel.send(mediumCompletedMsg);
 
-    if(hardCompletedMsg !== null)
-    await message.channel.send(hardCompletedMsg);
+    if (hardCompletedMsg !== null) await message.channel.send(hardCompletedMsg);
 
-    if(impossibleCompletedMsg !== null)
-    await message.channel.send(impossibleCompletedMsg);
+    if (impossibleCompletedMsg !== null) await message.channel.send(impossibleCompletedMsg);
 
     await message.channel.send(`**Missing Challenges**`);
 
-    if(easyMissingMsg !== null)
-    await message.channel.send(easyMissingMsg);
+    if (easyMissingMsg !== null) await message.channel.send(easyMissingMsg);
 
-    if(mediumMissingMsg !== null)
-    await message.channel.send(mediumMissingMsg);
+    if (mediumMissingMsg !== null) await message.channel.send(mediumMissingMsg);
 
-    if(hardMissingMsg !== null)
-    await message.channel.send(hardMissingMsg);
+    if (hardMissingMsg !== null) await message.channel.send(hardMissingMsg);
 
-    if(impossibleMissingMsg !== null)
-    await message.channel.send(impossibleMissingMsg);
+    if (impossibleMissingMsg !== null) await message.channel.send(impossibleMissingMsg);
 
     ogMsg.delete();
     return;

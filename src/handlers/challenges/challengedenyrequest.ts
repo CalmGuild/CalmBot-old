@@ -1,5 +1,5 @@
-const Channels = require("../../data/calm/channels.json");
-const Roles = require("../../data/calm/roles.json");
+import Channels from "../../data/calm/channels.json";
+import Roles from "../../data/calm/roles.json";
 import Client from "../../structures/Client";
 import { Message, MessageEmbed, Role, TextChannel } from "discord.js";
 

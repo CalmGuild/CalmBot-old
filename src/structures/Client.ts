@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { promisify } from "util";
 import Discord from "discord.js";
-import mongoose from "mongoose";
+import Database from "../utils/database/Database";
 
 const readdir = promisify(fs.readdir);
 
@@ -18,10 +18,7 @@ export default class Client extends Discord.Client {
       partials: ["GUILD_MEMBER", "USER", "MESSAGE", "REACTION", "CHANNEL"],
     });
 
-    mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    Database.initialize(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`);
   }
 
   async loadEvents(eventsDir: string) {
@@ -45,9 +42,9 @@ export default class Client extends Discord.Client {
       this.commands.set(commandName, command);
       if (command.aliases) {
         command.aliases.forEach((alias: any) => {
-            this.aliases.set(alias, command)
-        })
-    }
+          this.aliases.set(alias, command);
+        });
+      }
 
       console.log(`Loaded command: ${commandName} ${command.aliases ? `with aliases: ${command.aliases.join(", ")}` : ""}`);
     });
