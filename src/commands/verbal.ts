@@ -1,7 +1,7 @@
 import { Guild, GuildMember, Message, MessageAttachment, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
-import GuildSettings from "../schemas/GuildSettings";
-const Roles = require("../data/calm/roles.json");
+import Database from "../utils/database/Database";
+import Roles from "../data/calm/roles.json";
 
 const staffRoles = [Roles.GENERAL.STAFF_TEAM, Roles.GENERAL.DISCORD_STAFF, Roles.GENERAL.MANAGEMENT_TEAM];
 
@@ -15,12 +15,7 @@ module.exports = {
     // c!verbal (add, remove, info) (userid, casenumber) (reason) (attached image)
     if (!(await isMod(message.member))) return message.channel.send("Missing permissions.");
 
-    let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
-    if (guildSettings === null) {
-      const doc = new GuildSettings({ guildID: message.guild.id });
-      await doc.save();
-      guildSettings = doc;
-    }
+    let guildSettings = await Database.getGuildSettings(message.guild.id);
 
     if (args.length === 0) {
       const embed = new MessageEmbed()
@@ -178,7 +173,7 @@ function attachIsImage(msgAttach: MessageAttachment) {
 
 async function getUserWarnings(guildID: string, userID: string) {
   let arr = [];
-  let guildSettings = await GuildSettings.findOne({ guildID: guildID });
+  let guildSettings = await Database.getGuildSettings(guildID);
   guildSettings.verbals.forEach((element) => {
     if (element.user === userID) {
       arr.push(element);
@@ -204,7 +199,7 @@ async function getMember(id: string, guild: Guild) {
 }
 
 async function getWarningFromCase(guildID: string, caseID: string) {
-  let guildSettings = await GuildSettings.findOne({ guildID: guildID });
+  let guildSettings = await Database.getGuildSettings(guildID);
   let warning: any;
   guildSettings.verbals.forEach((element) => {
     if ((element.casenumber.toString() as string) === caseID) {

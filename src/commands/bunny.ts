@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import Client from "../structures/Client";
 
-const urls = require("../data/img/bunny.json");
+import urls from "../data/img/bunny.json";
 
 module.exports = {
   name: "bunny",

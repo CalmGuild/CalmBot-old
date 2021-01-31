@@ -1,4 +1,4 @@
-import { Message, Role, User } from "discord.js";
+import { Message, Role } from "discord.js";
 import Client from "../structures/Client";
 import adminmanualchallenge from "../handlers/admin/adminmanualchallenge";
 import admindisablecommand from "../handlers/admin/admindisablecommand";
@@ -8,7 +8,7 @@ import admincommand from "../handlers/admin/admincommand";
 import adminfindsuggestor from "../handlers/admin/adminfindsuggestor";
 import adminsay from "../handlers/admin/adminsay";
 
-const Roles = require("../data/calm/roles.json");
+import Roles from "../data/calm/roles.json";
 module.exports = {
   name: "admin",
   aliases: ["administrator"],

@@ -1,8 +1,8 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
-import GuildSettings from "../schemas/GuildSettings";
+import Database from "../utils/database/Database";
 
-const Channels = require("../data/calm/channels.json");
+import Channels from "../data/calm/channels.json";
 module.exports = {
   name: "suggest",
   aliases: ["suggestion"],
@@ -39,19 +39,14 @@ module.exports = {
 
     message.channel.send("Thanks for the suggestion! \n**Check it out: <#" + suggestionChannel.id + ">**");
 
-    let guildSettings = await GuildSettings.findOne({ guildID: message.guild.id });
-    if (guildSettings === null) {
-      const doc = new GuildSettings({ guildID: message.guild.id });
-      await doc.save();
-      guildSettings = doc;
-    }
+    let guildSettings = await Database.getGuildSettings(message.guild.id);
 
-    suggestionChannel.send(suggestionEmbed).then(m =>{
+    suggestionChannel.send(suggestionEmbed).then((m) => {
       m.react(firstReaction);
       m.react(secondReaction);
 
-      guildSettings.suggestions.push({msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion});
+      guildSettings.suggestions.push({ msgID: m.id, suggestorID: message.author.id, suggestorTag: message.author.tag, suggestion: suggestion });
       guildSettings.save();
-    })
+    });
   },
 };
