@@ -1,5 +1,5 @@
 const Channels = require("../data/calm/channels.json");
-const Challenges = require("../data/calm/challenges/DecemberChallenges.json");
+const Challenges = require("../data/calm/challenges/Challenges.json");
 import Client from "../structures/Client";
 import ChallengeParticipant from "../schemas/ChallengeParticipant";
 import { MessageEmbed, Message, MessageAttachment } from "discord.js";

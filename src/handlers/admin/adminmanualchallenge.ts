@@ -1,6 +1,6 @@
 import { Message, User } from "discord.js";
 import Client from "../../structures/Client";
-const Challenges = require("../../data/calm/challenges/DecemberChallenges.json");
+const Challenges = require("../../data/calm/challenges/Challenges.json");
 import ChallengeParticipant from "../../schemas/ChallengeParticipant";
 
 export default {

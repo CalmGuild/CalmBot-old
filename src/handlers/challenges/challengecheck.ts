@@ -1,7 +1,7 @@
 import { Message, Role } from "discord.js";
 import Client from "../../structures/Client";
 import ChallengeParticipant from "../../schemas/ChallengeParticipant";
-const Challenges = require("../../data/calm/challenges/DecemberChallenges.json");
+const Challenges = require("../../data/calm/challenges/Challenges.json");
 const Roles = require("../../data/calm/roles.json");
 
 export default {
