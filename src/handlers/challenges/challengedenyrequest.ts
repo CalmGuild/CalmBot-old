@@ -11,14 +11,12 @@ export default {
       return;
     }
 
-    const requestmessage = await message.channel.messages.fetch(args[1] as string);
-    if (requestmessage === undefined) {
-      message.channel.send("Unable to find request message with id " + args[1]);
-      return;
-    }
+    const requestmessage = await message.channel.messages.fetch(args[1] as string).catch(() => {
+      return message.channel.send("Unable to find request message with id " + args[1]);
+    });
 
     let reason = "";
-    for (let i = 2; i < args.length + 1; i++) {
+    for (let i = 2; i < args.length; i++) {
       reason += args[i] + " ";
     }
     if (reason === "") {
