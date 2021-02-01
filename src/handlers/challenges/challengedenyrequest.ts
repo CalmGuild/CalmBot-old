@@ -71,12 +71,12 @@ export default {
 
     let commandChannel: TextChannel;
     if (message.guild.id === "501501905508237312") {
-      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.COMMUNITY.COMMANDS.id) as TextChannel;
+      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.WEEKLY_MONTHLY.CHALLENGE_PROOF.id) as TextChannel;
     } else {
-      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.COMMUNITY.COMMANDS.name) as TextChannel;
+      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.WEEKLY_MONTHLY.CHALLENGE_PROOF.name) as TextChannel;
     }
 
-    if (commandChannel !== undefined) {
+    if (commandChannel) {
       commandChannel.send(`Sorry, <@${userID}>. your challenge request for challenge #${challengeID} has been denied.\n**REASON:** ${reason}`);
     }
     requestmessage.reactions.removeAll();

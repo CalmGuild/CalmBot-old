@@ -19,13 +19,14 @@ module.exports = {
       return;
     }
 
+    args[0] = args[0].toLowerCase();
     if (args[0] === "check") {
       challengecheck.run(client, message, args);
       return;
     } else if (args[0] === "leaderboard") {
       challengeleaderboard.run(client, message, args);
       return;
-    } else if (args[0] === "denyrequest") {
+    } else if (args[0] === "deny" || args[0] === "denyrequest") {
       challengedenyrequest.run(client, message, args);
       return;
     }

@@ -60,14 +60,15 @@ module.exports = async function messageReactionAdd(client: Client, reaction: Mes
     embed.addField("Accepted by:", user.username + "#" + user.discriminator);
     message.edit(embed);
 
-    let commandChannel;
+    let commandChannel: TextChannel;
     if (message.guild.id === "501501905508237312") {
-      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.COMMUNITY.COMMANDS.id);
+      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.WEEKLY_MONTHLY.CHALLENGE_PROOF.id) as TextChannel;
     } else {
-      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.COMMUNITY.COMMANDS.name);
+      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.WEEKLY_MONTHLY.CHALLENGE_PROOF.name) as TextChannel;
     }
 
-    if (commandChannel !== undefined) {
+
+    if (commandChannel) {
       commandChannel.send(`Congratulations, <@${userID}>. Your challenge request for challenge #${challengeID} has been accepted. Do ${client.prefix}challenge check, to check your progress.`);
     }
     message.reactions.removeAll();
