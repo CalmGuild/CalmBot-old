@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed, Util } from "discord.js";
 import Client from "../structures/Client";
 
 module.exports = {
@@ -52,7 +52,7 @@ module.exports = {
       function getCommand(client: Client, message: Message, input) {
         const cmd: any = client.commands.get(input.toLowerCase()) || client.aliases.get(input.toLowerCase());
         if (!cmd) {
-          return message.channel.send(`No information found for command \`${client.prefix}${input.toLowerCase()}\`!`);
+          return message.channel.send(`No information found for command \`${client.prefix}${Util.cleanContent(input.toLowerCase(), message)}\`!`);
         } else {
           let aliasList: Object;
           if (!cmd.aliases) {
