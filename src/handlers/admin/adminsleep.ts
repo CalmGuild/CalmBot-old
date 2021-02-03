@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
 import Database from "../../utils/database/Database";
 import Client from "../../structures/Client";
+import Logger from "../../utils/logger/Logger";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
@@ -8,11 +9,13 @@ export default {
     if (settings.sleep) {
       settings.sleep = false;
       settings.save();
-      message.channel.send("Turned off sleep mode");
+      message.channel.send("Turned off sleep mode.");
+      Logger.info("Turned off sleep mode");
     } else {
       settings.sleep = true;
       settings.save();
       message.channel.send("Turned on sleep mode. Run c!admin sleep to turn it off");
+      Logger.info("Turned on sleep mode.");
     }
   },
 };

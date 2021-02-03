@@ -2,6 +2,7 @@ import { Message, Role, TextChannel } from "discord.js";
 import Client from "../structures/Client";
 import channels from "../data/calm/channels.json";
 import roles from "../data/calm/roles.json";
+import logger from "../utils/logger/Logger";
 
 module.exports = {
   name: "lockdown",
@@ -32,14 +33,12 @@ module.exports = {
       newsChannel = message.guild.channels.cache.find((chan) => chan.name === channels.IMPORTANT.NEWS.name) as TextChannel;
     }
 
-    if(guildMemberRole === undefined || nitroBoosterRole === undefined) {
-      return message.channel.send("Unable to find one or more roles. Please make sure the Guild Member role exists and the Nitro Booster role exists")
+    if (guildMemberRole === undefined || nitroBoosterRole === undefined) {
+      return message.channel.send("Unable to find one or more roles. Please make sure the Guild Member role exists and the Nitro Booster role exists");
     }
 
     if (newsChannel) {
-      await newsChannel.send(
-        `**Attention,** \n<@${message.author.id}> has **initiated** a _server lockdown_. \nYou are **not muted**, but will not be able to talk until a server admin does \`c!unlock\``
-      );
+      await newsChannel.send(`**Attention,** \n<@${message.author.id}> has **initiated** a _server lockdown_. \nYou are **not muted**, but will not be able to talk until a server admin does \`c!unlock\``);
     }
 
     for (const categoryName in channels) {
@@ -54,7 +53,7 @@ module.exports = {
         }
 
         if (!channel) {
-          console.log(`Channel ${channelProperties.name} wasn't found`);
+          logger.verbose(`Channel ${channelProperties.name} wasn't found`);
         } else if (channelProperties.membersOnly && fullLock) {
           channel.updateOverwrite(guildMemberRole, { SEND_MESSAGES: false, ADD_REACTIONS: false });
         } else if (channelProperties.public && fullLock) {

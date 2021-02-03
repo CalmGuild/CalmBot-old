@@ -1,5 +1,6 @@
 import { Message, TextChannel } from "discord.js";
 import Client from "../../structures/Client";
+import Logger from "../../utils/logger/Logger";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
@@ -15,5 +16,6 @@ export default {
 
     const txtchannel = channel as TextChannel;
     txtchannel.send(text);
+    Logger.verbose(`Sent message (${text}) in ${txtchannel.name} at request from ${message.author.id}`);
   },
 };

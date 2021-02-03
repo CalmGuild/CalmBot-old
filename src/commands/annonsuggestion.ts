@@ -29,7 +29,7 @@ module.exports = {
       secondReaction = "❎";
     }
 
-    if (suggestionChannel === undefined) {
+    if (!suggestionChannel) {
       message.channel.send("Uh oh! We could not find a channel to put the suggestion in!");
       return;
     }

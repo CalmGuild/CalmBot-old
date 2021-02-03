@@ -3,6 +3,7 @@ import path from "path";
 import { promisify } from "util";
 import Discord from "discord.js";
 import Database from "../utils/database/Database";
+import logger from "../utils/logger/Logger";
 
 const readdir = promisify(fs.readdir);
 
@@ -18,25 +19,29 @@ export default class Client extends Discord.Client {
       partials: ["GUILD_MEMBER", "USER", "MESSAGE", "REACTION", "CHANNEL"],
     });
 
-    Database.initialize(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`);
+    logger.verbose("t");
+    Database.initialize(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, this);
   }
 
   async loadEvents(eventsDir: string) {
     const eventFiles = await readdir(eventsDir);
 
-    eventFiles.forEach((file: string, i: number) => {
+    let e = 0;
+    eventFiles.forEach((file: string) => {
       const eventName = file.split(".")[0];
       const event = require(path.join(eventsDir, file));
       this.on(eventName, event.bind(null, this));
 
-      console.log(`Loaded event: ${eventName}`);
+      e++;
     });
+    logger.info(`Done loading ${e} commands`);
   }
 
   async loadCommands(commandsDir: string) {
     const commandFiles = await readdir(commandsDir);
 
-    commandFiles.forEach((file: string, i: number) => {
+    let c = 0;
+    commandFiles.forEach((file: string) => {
       const commandName = file.split(".")[0];
       const command = require(path.join(commandsDir, file));
       this.commands.set(commandName, command);
@@ -46,7 +51,8 @@ export default class Client extends Discord.Client {
         });
       }
 
-      console.log(`Loaded command: ${commandName} ${command.aliases ? `with aliases: ${command.aliases.join(", ")}` : ""}`);
+      c++;
     });
+    logger.info(`Done loading ${c} commands.`);
   }
 }

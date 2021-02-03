@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 import { Message } from "discord.js";
 import Client from "../../structures/Client";
 import axios from "axios";
+import Logger from "../../utils/logger/Logger";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
@@ -30,8 +31,9 @@ export default {
           message.channel.send(`StatusCode: ${response.status} | StatusMessage: ${response.statusText}`);
         },
         (error) => {
-          console.log(error);
           message.channel.send("There was an error making that request!");
+          Logger.error(`Error making request to ${"http://" + ip + ":" + port + "/chat"}!!`);
+          Logger.error(error);
         }
       );
   },
