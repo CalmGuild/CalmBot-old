@@ -11,7 +11,7 @@ let APILastUsed = 0;
 export default {
   getGuildStaff: async function (): Promise<Interface.IGuildMember[]> {
     return new Promise((resolve, reject) => {
-      if (!canUseKey()) reject();
+      if (!canUseKey()) reject("Key overuse.");
       axios
         .get(`https://api.hypixel.net/guild?key=${KEY}&id=${CALM_GUILD_ID}`)
         .then((res) => {
@@ -41,7 +41,7 @@ export default {
 
   getPlayerFromUUID: async function (uuid: string): Promise<Interface.IPlayer> {
     return new Promise((resolve, reject) => {
-      if (!canUseKey()) reject();
+      if (!canUseKey()) reject("Key overuse.");
       axios
         .get(`https://api.hypixel.net/player?key=${KEY}&uuid=${uuid}`)
         .then((res) => {
