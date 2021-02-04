@@ -9,6 +9,7 @@ import adminfindsuggestor from "../handlers/admin/adminfindsuggestor";
 import adminsay from "../handlers/admin/adminsay";
 
 import Roles from "../data/calm/roles.json";
+import Logger from "../utils/logger/Logger";
 module.exports = {
   name: "admin",
   aliases: ["administrator"],
@@ -45,6 +46,8 @@ module.exports = {
       message.channel.send("Invalid Arguments.");
       return;
     }
+
+    Logger.verbose(`Admin command ran by ${message.author.id}. ${message.content}`);
 
     args[0] = args[0].toLowerCase();
     if (args[0] === "manualchallenge") {

@@ -1,6 +1,8 @@
 import { Message, TextChannel } from "discord.js";
+import { loggers } from "winston";
 import DiscordClient from "../structures/Client";
 import Database from "../utils/database/Database";
+import Logger from "../utils/logger/Logger";
 module.exports = async function message(client: DiscordClient, message: Message) {
   if (message.author.bot || message.channel.type === "dm") return;
 
@@ -54,6 +56,7 @@ module.exports = async function message(client: DiscordClient, message: Message)
       missingPerms = cmd.permissions.filter((permission) => !message.member.hasPermission(permission));
       if (missingPerms.length) return message.channel.send(`You are missing the following permissions required to run this command: ${missingPerms.map((x) => `\`${x}\``).join(", ")}`);
     }
+    Logger.verbose(`Running the ${cmd.name} commands for ${message.author.id}`);
     cmd.run(client, message, args);
   }
 };

@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
 import GuildSettings from "../../schemas/GuildSettings";
 import Client from "../../structures/Client";
+import Logger from "../../utils/logger/Logger";
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
     if (args.length < 2) {
@@ -33,5 +34,6 @@ export default {
     guildSettings.disabledCommands.push(cmdname as string);
     await guildSettings.save();
     message.channel.send(`Disabled \`${cmdname}\``);
+    Logger.info(`Disabled \`${cmdname}\``);
   },
 };

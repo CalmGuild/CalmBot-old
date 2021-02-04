@@ -1,5 +1,6 @@
 import { Message, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
+import logger from "../utils/logger/Logger";
 
 module.exports = {
   name: "help",
@@ -72,7 +73,7 @@ module.exports = {
       }
     } catch (err) {
       message.channel.send("Sorry, we have encountered an error :sob:");
-      console.log(err);
+      logger.error(err);
     }
   },
 };

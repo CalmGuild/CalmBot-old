@@ -2,6 +2,7 @@ import { Message, User } from "discord.js";
 import Client from "../../structures/Client";
 import Challenges from "../../data/calm/challenges/DecemberChallenges.json";
 import ChallengeParticipant from "../../schemas/ChallengeParticipant";
+import Logger from "../../utils/logger/Logger";
 
 export default {
   run: async function run(client: Client, message: Message, args: Array<String>) {
@@ -40,10 +41,12 @@ export default {
       participant.completedChallenges.delete(args[2]);
       await participant.save();
       message.channel.send(`Sucsess! Set ${args[1]}'s challenge #${args[2]} to __FALSE__`);
+      Logger.verbose(`Set ${args[1]}'s challenge #${args[2]} to FALSE`);
       if (participant.completedChallenges.size === 0) {
         let participant = await ChallengeParticipant.findOne({ discordID: args[1] as string });
         await participant.delete();
         message.channel.send("Document in database for that user has been marked for deletion due to that challenge being the user's last TRUE challenge");
+        Logger.verbose(`Deleting ${args[1]}'s challenge participant document as the last entry was manually deleted by ${message.author.id}`);
         return;
       }
       return;
@@ -52,6 +55,7 @@ export default {
       participant.completedChallenges.set(args[2], "true");
       await participant.save();
       message.channel.send(`Sucsess! Set ${args[1]}'s challenge #${args[2]} to __TRUE__`);
+      Logger.verbose(`Set ${args[1]}'s challenge #${args[2]} to TRUE`);
       return;
     }
   },

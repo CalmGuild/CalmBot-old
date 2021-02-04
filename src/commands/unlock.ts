@@ -1,6 +1,7 @@
 import { Message, Role, TextChannel } from "discord.js";
 import Client from "../structures/Client";
 import channels from "../data/calm/channels.json";
+import logger from "../utils/logger/Logger";
 
 module.exports = {
   name: "unlock",
@@ -47,7 +48,7 @@ module.exports = {
         }
 
         if (!channel) {
-          console.log(`Channel ${channelProperties.name} wasn't found`);
+          logger.verbose(`Channel ${channelProperties.name} wasn't found`);
         } else if (channelProperties.membersOnly && fullLock) {
           channel.updateOverwrite(guildMemberRole, { SEND_MESSAGES: true, ADD_REACTIONS: null });
         } else if (channelProperties.public && fullLock) {
