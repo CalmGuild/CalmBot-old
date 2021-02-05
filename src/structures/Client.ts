@@ -34,7 +34,7 @@ export default class Client extends Discord.Client {
 
       e++;
     });
-    logger.info(`Done loading ${e} commands`);
+    logger.info(`Done loading ${e} events`);
   }
 
   async loadCommands(commandsDir: string) {
