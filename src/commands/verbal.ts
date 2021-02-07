@@ -61,7 +61,6 @@ module.exports = {
 
       const embed = new MessageEmbed().setTitle(`${member.user.tag} has been verbal warned! Case: ${casenumber}`).setColor("#48db8f");
       message.channel.send(embed);
-      message.delete();
     } else if (args[0] === "remove") {
       // c!verbal remove (casenumber)
       if (args.length < 2) {
