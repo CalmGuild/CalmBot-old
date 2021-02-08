@@ -60,7 +60,8 @@ module.exports = {
       await guildSettings.save();
 
       const embed = new MessageEmbed().setTitle(`${member.user.tag} has been verbal warned! Case: ${casenumber}`).setColor("#48db8f");
-      message.channel.send(embed);
+      await message.channel.send(embed);
+      message.channel.send(`**Type of Punishment**: Verbal Warning\n**Discord Name & #**: ${member.user.tag}\n**Discord ID**: ${member.id}\n**Evidence**: ${reason}`, {files: [imgurl]})
     } else if (args[0] === "remove") {
       // c!verbal remove (casenumber)
       if (args.length < 2) {
