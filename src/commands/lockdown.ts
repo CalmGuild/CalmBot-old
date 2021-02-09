@@ -3,14 +3,16 @@ import Client from "../structures/Client";
 import channels from "../data/calm/channels.json";
 import roles from "../data/calm/roles.json";
 import logger from "../utils/logger/Logger";
+import Permission from "../utils/Permissions/Permission";
 
 module.exports = {
   name: "lockdown",
   description: "Locks down the server",
   category: "Administration",
-  permissions: ["ADMINISTRATOR"],
   usage: "lockdown [full]",
   run: async function run(client: Client, message: Message, args: Array<String>) {
+    if(!await Permission.isAdmin(message.member)) return message.channel.send("Missing permissions!");
+    
     // Check if full lockdown, or just a normal one.
     let fullLock: boolean;
     if (args[0] == "full") {

@@ -1,5 +1,7 @@
 import { Message, Role } from "discord.js";
 import Client from "../structures/Client";
+import Permission from "../utils/Permissions/Permission"
+
 import adminmanualchallenge from "../handlers/admin/adminmanualchallenge";
 import admindisablecommand from "../handlers/admin/admindisablecommand";
 import adminenablecommand from "../handlers/admin/adminenablecommand";
@@ -17,29 +19,9 @@ module.exports = {
   category: "Administration",
   usage: "admin <manualchallenge/disablecommand/enablecommand/sleep/command/findsuggestor/say>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
-    let srOfficerRole: Role;
-    if (message.guild.id === "501501905508237312") {
-      srOfficerRole = message.guild.roles.cache.find((r) => r.id === Roles.GENERAL.SR_OFFICER.id);
-    } else {
-      srOfficerRole = message.guild.roles.cache.find((r) => r.name === Roles.GENERAL.SR_OFFICER.name);
-    }
 
-    // I know this ugly af but i was lazy
-    if (!srOfficerRole) {
-      if (message.guild.id !== "501501905508237312") {
-        if (!message.member.hasPermission(["ADMINISTRATOR"]) && message.member.roles.cache.find((r) => r.id === srOfficerRole.id) === undefined) {
-          return message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
-        }
-      } else {
-        if (!message.member.hasPermission(["ADMINISTRATOR"]) && message.member.roles.cache.find((r) => r.id === srOfficerRole.id) === undefined) {
-          return message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
-        }
-      }
-    } else {
-      if (!message.member.hasPermission("ADMINISTRATOR")) {
-        message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
-        return;
-      }
+    if(!await Permission.isAdmin(message.member)) {
+      return message.channel.send("Missing admin permissions to execute this command!");
     }
 
     if (args.length === 0) {

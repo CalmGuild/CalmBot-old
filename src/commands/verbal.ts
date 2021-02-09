@@ -2,6 +2,7 @@ import { Guild, GuildMember, Message, MessageAttachment, MessageEmbed } from "di
 import Client from "../structures/Client";
 import Database from "../utils/database/Database";
 import Roles from "../data/calm/roles.json";
+import Permission from "../utils/Permissions/Permission";
 
 const staffRoles = [Roles.GENERAL.STAFF_TEAM, Roles.GENERAL.DISCORD_STAFF, Roles.GENERAL.MANAGEMENT_TEAM];
 
@@ -13,7 +14,7 @@ module.exports = {
   usage: "verbal <add/remove/info/help/flush>",
   run: async function run(client: Client, message: Message, args: Array<String>) {
     // c!verbal (add, remove, info) (userid, casenumber) (reason) (attached image)
-    if (!(await isMod(message.member))) return message.channel.send("Missing permissions.");
+    if(!await Permission.isStaff(message.member)) return message.channel.send("Missing permissions!");
 
     let guildSettings = await Database.getGuildSettings(message.guild.id);
 
@@ -146,23 +147,6 @@ module.exports = {
     }
   },
 };
-
-async function isMod(member: GuildMember) {
-  if (member.hasPermission(["ADMINISTRATOR"])) return true;
-  let hasModRole = false;
-  for (let i = 0; i < staffRoles.length; i++) {
-    if (member.guild.id === "501501905508237312") {
-      if (member.roles.cache.find((r) => r.id === staffRoles[i].id)) {
-        return true;
-      }
-    } else {
-      if (member.roles.cache.find((r) => r.name.toLowerCase() === staffRoles[i].name.toLowerCase())) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 
 function attachIsImage(msgAttach: MessageAttachment) {
   if (msgAttach === undefined) return false;

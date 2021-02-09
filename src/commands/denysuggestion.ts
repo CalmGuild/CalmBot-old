@@ -1,19 +1,15 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import Client from "../structures/Client";
 import Channels from "../data/calm/channels.json";
+import Permission from "../utils/Permissions/Permission";
 
 module.exports = {
   name: "denysuggestion",
   description: "Denies a suggestion!",
   category: "Administration",
-  permissions: ["ADMINISTRATOR"],
   usage: "denysuggestion <message id>",
   run: async function run(client: Client, message: Message, args: Array<string>) {
-    // Basic checks: Adminstrator Permission; no args provided; suggestions channel
-    if (!message.member.hasPermission("ADMINISTRATOR")) {
-      message.channel.send("Missing Permissions.\nRequired: **ADMINISTRATOR**");
-      return;
-    }
+    if(!await Permission.isAdmin(message.member)) return message.channel.send("Missing permissions!");
 
     if (args.length === 0) return message.channel.send("Missing Arguments.\n**Usage:** `c!denysuggestion [message id]`");
 

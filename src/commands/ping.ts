@@ -1,6 +1,6 @@
-import { Message } from "discord.js";
+import { Message, MessageManager } from "discord.js";
 import Client from "../structures/Client";
-
+import Permissions from "../utils/Permissions/Permission"
 module.exports = {
   name: "ping",
   description: "Pong!",
