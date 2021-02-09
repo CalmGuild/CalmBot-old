@@ -8,7 +8,5 @@ module.exports = {
   usage: "ping",
   run: async function run(client: Client, message: Message) {
     message.channel.send(`Latency is \`${Date.now() - message.createdTimestamp}ms\`, Pong!`);
-    const isadmin = await Permissions.isAdmin(message.member);
-    console.log(isadmin);
   },
 };
