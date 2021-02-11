@@ -14,6 +14,7 @@ export default class Client extends Discord.Client {
   commands = new Discord.Collection();
   aliases = new Discord.Collection();
   settings: ISettings | undefined;
+  developers = ["438057670042320896" /*Miqhtie*/ , "234576713005137920" /*Joel*/ ]
 
   constructor() {
     super({

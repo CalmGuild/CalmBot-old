@@ -44,6 +44,7 @@ module.exports = async function message(client: DiscordClient, message: Message)
   }
   if (!cmd) return;
   if (cmd) {
+    if (!client.developers.includes(message.author.id) && client.settings.disabled) return message.channel.send('The bot is currently in maintenance for ' + client.settings.disabledReason);
     if (guildSettings.disabledCommands.includes(cmd.name)) return;
     if (cmd.name !== "admin" && guildSettings.sleep) return message.channel.send("Bot is in sleep mode! Do c!admin sleep to turn it back on!");
 

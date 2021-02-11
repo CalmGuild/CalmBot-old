@@ -2,11 +2,13 @@ import fs from "fs-extra";
 import logger from "../logger/Logger";
 
 export interface ISettings {
-  test: string;
+  disabled: boolean,
+  disabledReason: string | undefined
 }
 
 export const defaultSettings: ISettings = {
-  test: "a"
+  disabled: false,
+  disabledReason: undefined
 }
 
 const settingsPath = "./settings.json";
