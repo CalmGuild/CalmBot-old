@@ -43,6 +43,7 @@ module.exports = {
           if (!categoryID) {
             var categoryIcon = ":grey_question:";
           }
+          if(categoryID !== "Developers")
           embed.addField(`${categoryIcon} ${categoryID} (${category.size})`, category.map((cmd: any) => `${cmd.name}`).join(" **|** "));
         }
         embed.addField(":question: Command Information", `${client.prefix}help <command>`);

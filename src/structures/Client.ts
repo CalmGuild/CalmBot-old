@@ -4,6 +4,7 @@ import { promisify } from "util";
 import Discord from "discord.js";
 import Database from "../utils/database/Database";
 import logger from "../utils/logger/Logger";
+import { ISettings, getSettings } from "../utils/settings/Settings"
 
 const readdir = promisify(fs.readdir);
 
@@ -12,6 +13,8 @@ export default class Client extends Discord.Client {
   version = "3.0.0";
   commands = new Discord.Collection();
   aliases = new Discord.Collection();
+  settings: ISettings | undefined;
+  developers = ["438057670042320896" /*Miqhtie*/ , "234576713005137920" /*Joel*/ ]
 
   constructor() {
     super({
@@ -19,8 +22,11 @@ export default class Client extends Discord.Client {
       partials: ["GUILD_MEMBER", "USER", "MESSAGE", "REACTION", "CHANNEL"],
     });
 
-    logger.verbose("t");
+    
     Database.initialize(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, this);
+    getSettings().then((settings) => {
+      this.settings = settings;
+    });
   }
 
   async loadEvents(eventsDir: string) {
