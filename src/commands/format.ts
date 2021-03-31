@@ -5,8 +5,7 @@ import Roles from "../data/calm/roles.json";
 const staffRoles = [Roles.GENERAL.STAFF_TEAM, Roles.GENERAL.DISCORD_STAFF, Roles.GENERAL.MANAGEMENT_TEAM];
 
 const format = "**Type of Punishment:** PUNISHMENT_TYPE\n**Discord name & #:** DISCORD_NAME\n**Discord ID:** DISCORD_ID\n**Evidence:** REASON";
-const genFormat = (punishmentType: string, name: string, id: string, reason: string): string =>
-  format.replace("PUNISHMENT_TYPE", punishmentType).replace("DISCORD_NAME", name).replace("DISCORD_ID", id).replace("REASON", reason);
+const genFormat = (punishmentType: string, name: string, id: string, reason: string): string => format.replace("PUNISHMENT_TYPE", punishmentType).replace("DISCORD_NAME", name).replace("DISCORD_ID", id).replace("REASON", reason);
 
 module.exports = {
   name: "format",
@@ -32,10 +31,10 @@ module.exports = {
     message.guild.members
       .fetch(userid as string)
       .then((member) => {
-        message.channel.send(genFormat(args[0] as string, member.user.tag, member.id, args[2] as string), { files: [message.attachments.array()[0].url] });
+        message.channel.send(genFormat(args[0] as string, member.user.tag, member.id, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0].url] });
       })
       .catch((e) => {
-        message.channel.send(genFormat(args[0] as string, "Invalid user ID", args[1] as string, args[2] as string), { files: [message.attachments.array()[0].url] });
+        message.channel.send(genFormat(args[0] as string, "Invalid user ID", args[1] as string, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0].url] });
       });
   },
 };
