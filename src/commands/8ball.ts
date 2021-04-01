@@ -22,7 +22,9 @@ const responses = [
   "My sources say no",
   "Outlook not so good",
   "Very doubtful",
+  "I DONT FEEL LIKE ANSWERING THAT, CONTINUE ON WITH YOUR DAY"
 ];
+
 
 module.exports = {
   name: "8ball",
