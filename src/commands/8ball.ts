@@ -3,25 +3,33 @@ import Client from "../structures/Client";
 
 const responses = [
   "It is certain",
+  "I don't care",
   "It is decidedly so",
   "Without a doubt",
   "Yes definitely",
+  "Error",
   "You may rely on it",
+  "Im not answering that",
   "As I see it, yes",
   "Most likely",
+  "Miqhtie Wrote This",
   "Outlook good",
   "Yes",
+  "No",
   "Signs point to yes",
   "Reply hazy try again",
   "Ask again later",
   "Better not tell you now",
   "Cannot predict now",
+  "This Is A Perfect Discord Bot",
   "Concentrate and ask again",
   "Don't count on it",
   "My reply is no",
   "My sources say no",
   "Outlook not so good",
+  "what",
   "Very doubtful",
+  "I don't feel like answering that, continue on with your day",
 ];
 
 module.exports = {
