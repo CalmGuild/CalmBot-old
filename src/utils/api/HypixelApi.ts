@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
-import axios, { AxiosError } from "axios";
-import * as Interface from "../api/Interfaces";
+import axios from "axios";
+import { IGuildMember, IPlayer } from "../api/Interfaces";
 import logger from "../logger/Logger";
 const KEY = process.env.HYPIXEL_API_KEY;
 const CALM_GUILD_ID = "5af718d40cf2cbe7a9eeb063";
@@ -9,7 +9,7 @@ let APIUsage = 0;
 let APILastUsed = 0;
 
 export default {
-  getGuildStaff: async function (): Promise<Interface.IGuildMember[]> {
+  getGuildStaff: async function (): Promise<IGuildMember[]> {
     return new Promise((resolve, reject) => {
       if (!canUseKey()) reject("Key overuse.");
       axios
@@ -17,16 +17,16 @@ export default {
         .then((res) => {
           const guild = res.data?.guild || null;
 
-          let guildStaffRanks = [];
+          let guildStaffRanks: string[] = [];
 
-          guild.ranks.forEach((rank) => {
+          guild.ranks.forEach((rank: any) => {
             if (rank.priority >= 4) {
               guildStaffRanks.push(rank.name);
             }
           });
 
-          let staffMembers = [];
-          (guild.members as Interface.IGuildMember[]).forEach((member) => {
+          let staffMembers: IGuildMember[] = [];
+          (guild.members as IGuildMember[]).forEach((member) => {
             if (guildStaffRanks.includes(member.rank) || member.rank === "Guild Master") staffMembers.push(member);
           });
 
@@ -39,7 +39,7 @@ export default {
     });
   },
 
-  getPlayerFromUUID: async function (uuid: string): Promise<Interface.IPlayer> {
+  getPlayerFromUUID: async function (uuid: string): Promise<IPlayer> {
     return new Promise((resolve, reject) => {
       if (!canUseKey()) reject("Key overuse.");
       axios

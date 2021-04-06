@@ -2,28 +2,28 @@ import fs from "fs-extra";
 import logger from "../logger/Logger";
 
 export interface ISettings {
-  disabled: boolean,
-  disabledReason: string | undefined
+  disabled: boolean;
+  disabledReason: string | undefined;
 }
 
 export const defaultSettings: ISettings = {
   disabled: false,
-  disabledReason: undefined
-}
+  disabledReason: undefined,
+};
 
 const settingsPath = "./settings.json";
 
 export async function getSettings(): Promise<ISettings> {
   return new Promise((resolve, reject) => {
     fs.readJson(settingsPath)
-    .then((settings: any) => {
-      resolve(Object.assign(settings, defaultSettings));
-    })
-    .catch(() => {
-      logger.warn("No settings file provided, using default settings!");
-      resolve(defaultSettings);
-    });
-  })
+      .then((settings: any) => {
+        resolve(Object.assign(settings, defaultSettings));
+      })
+      .catch(() => {
+        logger.warn("No settings file provided, using default settings!");
+        resolve(defaultSettings);
+      });
+  });
 }
 
 export function saveSettings(settings: ISettings) {

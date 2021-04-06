@@ -1,6 +1,6 @@
 import { Schema, model, Document } from "mongoose";
 
-interface IVerbals {
+export interface IVerbals {
   moderator: string;
   user: string;
   reasonText: string;

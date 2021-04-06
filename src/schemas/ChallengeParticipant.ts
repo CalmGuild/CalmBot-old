@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 export interface IChallengeParticipant extends Document {
   discordID: string;
-  completedChallenges: Map<String, String>;
+  completedChallenges: Map<string, string>;
 }
 
 const ChallengeParticipantSchema = new Schema({
