@@ -7,7 +7,7 @@ export default async function message(client: DiscordClient, message: Message) {
 
   // #count-to-x channel code so invalid numbers are deleted and channel name is updated
   let currentChannel = message.channel as TextChannel;
-  if (currentChannel.name.startsWith("count-to-")) {
+  if (message.guild && currentChannel.name.startsWith("count-to-")) {
     const messageList = await message.channel.messages.fetch({ limit: 2 });
     const previousMessage = messageList.last();
     if (!previousMessage) return;

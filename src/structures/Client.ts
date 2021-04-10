@@ -139,14 +139,16 @@ export default class Client extends Discord.Client {
           const subcommands = walk(path.join(dir, file));
 
           let options: ISubCommandSettings = defaultSettings;
-          try {
-            options = require(path.join(dir, parentName, "subcommandSettings.ts")).default;
-          } catch (e) {
+          const parentFiles = fs.readdirSync(path.join(dir, parentName));
+          const subcommandSettings = parentFiles.find((f) => f.toLowerCase().startsWith("subcommandsettings"));
+          if (subcommandSettings) {
+            options = require(path.join(dir, parentName, subcommandSettings)).default;
+          } else {
             logger.warn(`No subcommandSettings.ts file found for subcommand: ${name}, using default settings!`);
           }
 
           let defaultSubCommand: string | undefined;
-          if (files.includes(name + ".ts")) {
+          if (files.includes(name + ".ts") || files.includes(name + ".js")) {
             defaultSubCommand = name;
             subcommands.set(name, require(path.join(dir, name)).default);
           } else {
