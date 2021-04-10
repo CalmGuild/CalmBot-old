@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
-import Discord, { Collection, Message } from "discord.js";
+import Discord, { Collection, EmojiIdentifierResolvable, Message } from "discord.js";
 import Database from "../utils/database/Database";
 import logger from "../utils/logger/Logger";
 import { ISettings, getSettings } from "../utils/settings/Settings";
-import { ICommand, ISubCommandSettings } from "./Interfaces";
+import { ICommand, IReactionListener, ISubCommandSettings, ReactionCallback } from "./Interfaces";
 
 import PermissionHandler from "../utils/Permissions/Permission";
 
@@ -18,6 +18,7 @@ export default class Client extends Discord.Client {
   commands: Collection<string, ICommand> = new Collection();
   settings: ISettings | undefined;
   developers = ["438057670042320896" /*Miqhtie*/, "234576713005137920" /*Joel*/];
+  reactionListeners: IReactionListener[] = [];
 
   constructor() {
     super({
@@ -220,5 +221,13 @@ export default class Client extends Discord.Client {
       return commands;
     }
     logger.info(`Done registering ${this.commands.size} commands. Took ${Date.now() - timestarted}ms`);
+  }
+
+  addReactionListener(message: Message, emoji: EmojiIdentifierResolvable, callback: ReactionCallback) {
+    this.reactionListeners.push({
+      messageid: message.id,
+      emoji: emoji,
+      callback: callback,
+    });
   }
 }
