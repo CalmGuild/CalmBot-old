@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import Discord, { Collection, EmojiIdentifierResolvable, Message } from "discord.js";
+import Discord, { Collection, Message } from "discord.js";
 import Database from "../utils/database/Database";
 import logger from "../utils/logger/Logger";
 import { ISettings, getSettings } from "../utils/settings/Settings";
@@ -223,11 +223,11 @@ export default class Client extends Discord.Client {
     logger.info(`Done registering ${this.commands.size} commands. Took ${Date.now() - timestarted}ms`);
   }
 
-  addReactionListener(message: Message, emoji: EmojiIdentifierResolvable, callback: ReactionCallback) {
+  addReactionListener(message: Message, callback: ReactionCallback, userwhitelist?: string[]) {
     this.reactionListeners.push({
       messageid: message.id,
-      emoji: emoji,
       callback: callback,
+      userwhitelist: userwhitelist,
     });
   }
 }

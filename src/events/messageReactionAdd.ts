@@ -7,7 +7,8 @@ import { MessageReaction, MessageEmbed, User, Message, TextChannel, Role } from 
 
 export default async function messageReactionAdd(client: Client, reaction: MessageReaction, user: User) {
   const reactionListener = client.reactionListeners.find((r) => r.messageid === reaction.message.id);
-  if (reactionListener) {
+  if (reactionListener && !user.bot) {
+    if (reactionListener.userwhitelist && !reactionListener.userwhitelist.includes(user.id)) return;
     reactionListener.callback(client, reaction, user);
     return;
   }
