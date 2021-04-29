@@ -1,4 +1,4 @@
-import { Message, TextChannel } from "discord.js";
+import { Message } from "discord.js";
 import DiscordClient from "../structures/Client";
 import Database from "../utils/database/Database";
 

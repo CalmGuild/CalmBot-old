@@ -6,6 +6,13 @@ import Database from "../utils/database/Database";
 import { MessageReaction, MessageEmbed, User, Message, TextChannel, Role } from "discord.js";
 
 export default async function messageReactionAdd(client: Client, reaction: MessageReaction, user: User) {
+  const reactionListener = client.reactionListeners.find((r) => r.messageid === reaction.message.id);
+  if (reactionListener && !user.bot) {
+    if (reactionListener.userwhitelist && !reactionListener.userwhitelist.includes(user.id)) return;
+    reactionListener.callback(client, reaction, user);
+    return;
+  }
+
   if (user.bot || !reaction.message.guild) return;
 
   const message: Message = await reaction.message.channel.messages.fetch(reaction.message.id);
@@ -41,11 +48,11 @@ export default async function messageReactionAdd(client: Client, reaction: Messa
     const fields = message.embeds[0]?.fields;
     const userID = fields?.find((f) => f.name.toLowerCase() === "user id:")?.value;
     const challengeID = fields?.find((f) => f.name.toLowerCase() === "challenge id:")?.value;
-    
+
     if (!userID || !challengeID) return;
 
     let participant = await Database.getChallengeParticipant(userID);
-    if (!participant) return
+    if (!participant) return;
     participant.completedChallenges.set(challengeID, "true");
     await participant.save();
 
@@ -72,7 +79,7 @@ export default async function messageReactionAdd(client: Client, reaction: Messa
 
     commandChannel = commandChannel as TextChannel;
     commandChannel?.send(`Congratulations, <@${userID}>. Your challenge request for challenge #${challengeID} has been accepted. Do ${client.prefix}challenge check, to check your progress.`);
-    
+
     message.reactions.removeAll();
   }
-};
+}

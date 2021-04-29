@@ -1,9 +1,15 @@
-import { Message, PermissionResolvable } from "discord.js";
+import { Message, MessageReaction, PermissionResolvable, User } from "discord.js";
 import Client from "./Client";
 
 export type RunCallback = (client: Client, message: Message, args: string[]) => void;
+export type ReactionCallback = (client: Client, reaction: MessageReaction, user: User) => void;
 export type Permission = PermissionResolvable | PermissionsEnum;
 
+export interface IReactionListener {
+  messageid: string;
+  callback: ReactionCallback;
+  userwhitelist?: string[];
+}
 export interface ICommand {
   settings: ICommandSettings | undefined;
   run: RunCallback;

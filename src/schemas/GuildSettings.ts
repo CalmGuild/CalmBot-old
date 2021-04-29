@@ -15,6 +15,11 @@ interface ISuggestions {
   suggestion: string;
 }
 
+interface ITicket {
+  member: string;
+  channel: string;
+}
+
 export interface IGuildSettings extends Document {
   guildID: string;
   disabledCommands: Array<string>;
@@ -22,6 +27,10 @@ export interface IGuildSettings extends Document {
   punishmentcases: number;
   suggestions: Array<ISuggestions>;
   sleep: Boolean;
+  tickets: ITicket[];
+  totalTickets: number;
+  ticketRoles: string[];
+  ticketSupportedRole: string | undefined;
 }
 
 const GuildSettingsScema = new Schema({
@@ -31,6 +40,10 @@ const GuildSettingsScema = new Schema({
   punishmentcases: { type: Number, default: 1 },
   sleep: { type: Boolean, default: false },
   suggestions: { type: Array<ISuggestions>(), default: new Array<ISuggestions>() },
+  tickets: { type: Array<ITicket>(), default: new Array<ITicket>() },
+  totalTickets: { type: Number, default: 0 },
+  ticketRoles: { type: Array<String>(), default: new Array<String>() },
+  ticketSupportedRole: { type: String, default: undefined },
 });
 
 export default model<IGuildSettings>("GuildSettings", GuildSettingsScema);
