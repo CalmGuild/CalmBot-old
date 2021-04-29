@@ -17,7 +17,7 @@
 
 ## Contributing
 
-  
+### NOTE: DEVELOPMENT FOR [V3](https://github.com/CalmGuild/CalmBot/tree/v3) IS CURRENTLY UNDERWAY AND IT IS RECOMMENDED YOU CONTRIBUTE TO THAT BRANCH INSTEAD.
 
 1. Register a bot on [Discord's Developer Portal](https://discord.com/developers/applications)
 
