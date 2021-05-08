@@ -14,7 +14,6 @@ const defaultSettings: ISubCommandSettings = {
 
 export default class Client extends Discord.Client {
   prefix = "c!";
-  version = "3.0.0";
   commands: Collection<string, ICommand> = new Collection();
   settings: ISettings | undefined;
   developers = ["438057670042320896" /*Miqhtie*/, "234576713005137920" /*Joel*/];

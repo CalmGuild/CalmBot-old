@@ -25,7 +25,7 @@ function AnnonSuggestionCommand(): ICommand {
       return;
     }
 
-    const suggestionEmbed = new MessageEmbed().setFooter(`Anonymous Suggestion • CalmBot v${client.version}`).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
+    const suggestionEmbed = new MessageEmbed().setFooter(`Anonymous Suggestion`).setColor("#007FFF").setTitle("Suggestion:").setDescription(suggestion).setTimestamp();
 
     // Delete message so people can not see who made suggestion
     message.delete();

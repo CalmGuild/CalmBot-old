@@ -19,10 +19,8 @@ function ApproveSuggestionCommand(): ICommand {
     suggestionChannel.messages.fetch(args[0]).then((deniedSuggestion) => {
       let suggestion = deniedSuggestion.embeds[0]?.description;
 
-      let suggestionAuthor = deniedSuggestion.embeds[0]?.footer?.text?.split(` • CalmBot v${client.version}`, 1);
-      let suggestorAvatar = deniedSuggestion.embeds[0]?.footer?.iconURL;
       let deniedEmbed = new MessageEmbed()
-        .setFooter(`${suggestionAuthor} • CalmBot v${client.version}`, suggestorAvatar)
+        .setFooter(deniedSuggestion.embeds[0]?.footer)
         .setColor("#f74a4a")
         .setTitle("Denied Suggestion:")
         .setDescription(suggestion)

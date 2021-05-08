@@ -25,7 +25,7 @@ function SuggestCommand(): ICommand {
     }
 
     const suggestionEmbed = new MessageEmbed()
-      .setFooter(`${message.member.displayName} • CalmBot v${client.version}`, message.author.displayAvatarURL())
+      .setFooter(`${message.member.displayName}`, message.author.displayAvatarURL())
       .setColor("#007FFF")
       .setTitle("Suggestion:")
       .setDescription(args.join(" "))

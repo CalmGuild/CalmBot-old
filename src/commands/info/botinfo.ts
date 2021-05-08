@@ -16,7 +16,6 @@ function BotInfoCommand(): ICommand {
       .setColor("#0083dd")
       .setThumbnail(getAvatarURL(client.user))
       .setAuthor("CalmBot Info and Credits", getAvatarURL(client.user), "https://github.com/CalmGuild/CalmBot")
-      .addField("ℹ Version:", `v${client.version}`, false)
       .addField(
         "📝 Credits:",
         "Bot by **[Miqhtiedev](https://github.com/Miqhtiedev)** with contributions from **[SkillBeatsAll](https://github.com/SkillBeatsAll)** and [others](https://github.com/CalmGuild/CalmBot/graphs/contributors)",

@@ -63,7 +63,7 @@ function ChallengeCommand(): ICommand {
       embed.addField("Proof", args[1]);
     }
     embed.addField("User ID:", message.author.id);
-    embed.setFooter("CalmBot | v" + client.version);
+    embed.setFooter("CalmBot");
     if (id.startsWith("e")) {
       embed.setColor("#34e07e");
     } else if (id.startsWith("m")) {

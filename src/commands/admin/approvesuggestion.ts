@@ -16,10 +16,8 @@ function ApproveSuggestionCommand(): ICommand {
 
     suggestionChannel.messages.fetch(args[0]).then((approvedSuggestion) => {
       let suggestion = approvedSuggestion.embeds[0]?.description;
-      let suggestionAuthor = approvedSuggestion.embeds[0]?.footer?.text?.split(` • CalmBot v${client.version}`, 1);
-      let suggestorAvatar = approvedSuggestion.embeds[0]?.footer?.iconURL;
       let approvedEmbed = new MessageEmbed()
-        .setFooter(`${suggestionAuthor} • CalmBot v${client.version}`, suggestorAvatar)
+        .setFooter(approvedSuggestion.embeds[0]?.footer)
         .setColor("#57ff73")
         .setTitle("Approved Suggestion:")
         .setDescription(suggestion)
