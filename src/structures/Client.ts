@@ -87,12 +87,12 @@ export default class Client extends Discord.Client {
       }
 
       if (command.settings?.maximumArgs && command.settings?.maximumArgs < args.length) {
-        message.channel.send(`Too many arguments!\nMax: ${command.settings.maximumArgs}\nProvided: ${args.length}`);
+        message.channel.send(`Too many arguments!\nMax: ${command.settings.maximumArgs}\nProvided: ${args.length}\nUsage: \`${command.settings.usage}\``);
         return;
       }
 
       if (command.settings?.minimumArgs && command.settings?.minimumArgs > args.length) {
-        message.channel.send(`Too little arguments!\nMin: ${command.settings.minimumArgs}\nProvided: ${args.length}`);
+        message.channel.send(`Too little arguments!\nMin: ${command.settings.minimumArgs}\nProvided: ${args.length}\nUsage: \`${command.settings.usage}\``);
         return;
       }
 
