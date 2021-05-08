@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "module": "commonjs",
+    "outDir": "./build",
+    "rootDir": "./src",
     "lib": ["esnext"],
-    "allowJs": true,
-    "outDir": "build",
-    "rootDir": "src",
-    "alwaysStrict": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "typeRoots": ["./src/typings", "./node_modules/@types"],
     "esModuleInterop": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   }
 }
