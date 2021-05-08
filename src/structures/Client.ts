@@ -72,12 +72,17 @@ export default class Client extends Discord.Client {
     }
 
     try {
-
-      if (message.guild && !(await Permission.isAdmin(message.member!!))) {
+      if (message.guild) {
         const guildSettings = await Database.getGuildSettings(message.guild!!.id);
+
         const commandName = message.content.substring(this.prefix.length, message.content.length).split(" ")[0]?.toLowerCase();
-  
-        if (guildSettings.disabledCommands.includes(commandName!!)) {
+
+        if (guildSettings.sleep && commandName !== "admin") {
+          message.channel.send(`Bot is in sleep mode! Do ${this.prefix}admin sleep to turn it back on!`);
+          return;
+        }
+
+        if (guildSettings.disabledCommands.includes(commandName!!) && !(await Permission.isAdmin(message.member!!))) {
           message.channel.send("This command is disabled!");
           return;
         }
