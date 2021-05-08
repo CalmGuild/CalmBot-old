@@ -1,9 +1,9 @@
 import { Message, MessageEmbed } from "discord.js";
-import Client from "../../../structures/Client";
-import { ICommand, RunCallback } from "../../../structures/Interfaces";
-import Database from "../../../utils/database/Database";
-import logger from "../../../utils/logger/Logger";
-import Ticket, { TicketType } from "../../../utils/ticket/Ticket";
+import Client from "../../structures/Client";
+import { ICommand, RunCallback } from "../../structures/Interfaces";
+import Database from "../../utils/database/Database";
+import logger from "../../utils/logger/Logger";
+import Ticket, { TicketType } from "../../utils/ticket/Ticket";
 
 let cooldown: string[] = [];
 
@@ -91,6 +91,7 @@ function OpenCommand(): ICommand {
     settings: {
       description: "Open a ticket",
       usage: "ticket open",
+      guildOnly: true
     },
   };
 }
