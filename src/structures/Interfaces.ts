@@ -43,7 +43,7 @@ export interface ISubCommandSettings {
 }
 
 export enum PermissionsEnum {
-  DEVELOPER,
-  ADMIN,
-  STAFF,
+  DEVELOPER = "Developer",
+  ADMIN = "Admin",
+  STAFF = "Staff",
 }
