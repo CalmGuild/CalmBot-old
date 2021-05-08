@@ -7,6 +7,7 @@ import { ISettings, getSettings } from "../utils/settings/Settings";
 import { ICommand, IReactionListener, ISubCommandSettings, ReactionCallback } from "./Interfaces";
 
 import PermissionHandler from "../utils/Permissions/Permission";
+import Permission from "../utils/Permissions/Permission";
 
 const defaultSettings: ISubCommandSettings = {
   guildOnly: false,
@@ -71,6 +72,17 @@ export default class Client extends Discord.Client {
     }
 
     try {
+
+      if (message.guild && !(await Permission.isAdmin(message.member!!))) {
+        const guildSettings = await Database.getGuildSettings(message.guild!!.id);
+        const commandName = message.content.substring(this.prefix.length, message.content.length).split(" ")[0]?.toLowerCase();
+  
+        if (guildSettings.disabledCommands.includes(commandName!!)) {
+          message.channel.send("This command is disabled!");
+          return;
+        }
+      }
+
       if (command.settings?.permissions && message.member) {
         if (!(await PermissionHandler.hasPermission(this, message.member, command.settings.permissions))) {
           message.channel.send(`Missing permissions! Required: \`${command.settings.permissions}\``);
