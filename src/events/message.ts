@@ -15,20 +15,24 @@ export default async function message(client: DiscordClient, message: Message) {
       message.channel.send("Exited.");
       return;
     }
-    
+
     prompt.callback(message);
     return;
   }
 
   if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 
-  if (message.guild) {
-    await Database.getGuildSettings(message.guild.id); // gen guild settings
-  }
-
   const args: string[] = message.content.slice(client.prefix.length).trim().split(/ +/g);
-
   const commandName = args.shift()!.toLowerCase();
+
+  if (message.guild) {
+    const settings = await Database.getGuildSettings(message.guild.id); // gen guild settings
+    const tag = settings.tags.find((t) => t.name === commandName);
+    if (tag) {
+      message.channel.send(tag.response);
+      return;
+    }
+  }
 
   let command: any = client.commands.get(commandName);
   if (command) {
