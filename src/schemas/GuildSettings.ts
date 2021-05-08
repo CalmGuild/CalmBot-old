@@ -20,6 +20,10 @@ interface ITicket {
   channel: string;
 }
 
+interface ITag {
+  name: string;
+  response: string;
+}
 export interface IGuildSettings extends Document {
   guildID: string;
   disabledCommands: Array<string>;
@@ -31,6 +35,7 @@ export interface IGuildSettings extends Document {
   totalTickets: number;
   ticketRoles: string[];
   ticketSupportedRole: string | undefined;
+  tags: ITag[];
 }
 
 const GuildSettingsScema = new Schema({
@@ -44,6 +49,7 @@ const GuildSettingsScema = new Schema({
   totalTickets: { type: Number, default: 0 },
   ticketRoles: { type: Array<String>(), default: new Array<String>() },
   ticketSupportedRole: { type: String, default: undefined },
+  tags: { type: Array<ITag>(), default: new Array<ITag>() },
 });
 
 export default model<IGuildSettings>("GuildSettings", GuildSettingsScema);
