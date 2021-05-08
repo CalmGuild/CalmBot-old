@@ -3,7 +3,6 @@ import path from "path";
 import Discord, { Collection, Message } from "discord.js";
 import Database from "../utils/database/Database";
 import logger from "../utils/logger/Logger";
-import { ISettings, getSettings } from "../utils/settings/Settings";
 import { ICommand, IReactionListener, ISubCommandSettings, ReactionCallback } from "./Interfaces";
 
 import PermissionHandler from "../utils/Permissions/Permission";
@@ -16,7 +15,6 @@ const defaultSettings: ISubCommandSettings = {
 export default class Client extends Discord.Client {
   prefix = "c!";
   commands: Collection<string, ICommand> = new Collection();
-  settings: ISettings | undefined;
   developers = ["438057670042320896" /*Miqhtie*/, "234576713005137920" /*Joel*/];
   reactionListeners: IReactionListener[] = [];
 
@@ -27,9 +25,6 @@ export default class Client extends Discord.Client {
     });
 
     Database.initialize(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, this);
-    getSettings().then((settings) => {
-      this.settings = settings;
-    });
   }
 
   loadEvents(eventsDir: string) {
@@ -62,10 +57,6 @@ export default class Client extends Discord.Client {
   }
 
   async executeCommand(command: ICommand, message: Message, args: string[]) {
-    if (this.settings?.disabled) {
-      message.channel.send(`Bot is currently in maintenance for ${this.settings.disabledReason}`);
-      return;
-    }
     if (command.settings?.guildOnly && !message.guild) {
       message.channel.send("This command can only be executed inside a guild!");
       return;
