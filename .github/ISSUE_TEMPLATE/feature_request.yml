@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest an idea for this project
+labels: "Feature Request"
+body:
+  - type: markdown
+  attributes:
+    value: |
+    Thanks for taking this time to fill out a feature request. Please be as descriptive or as non descriptive as possible.
+
+  - type: textarea
+  attributes:
+    label: What feature do you want to see added?
+    description: What would you like to add?
+  validations:
+    required: true
+
+  - type: textarea
+  attributes:
+    label: Why would this improve Calmbot?
+    description: What about this feature would improve the bot overall?
+  validations:
+    required: true
+    
+  - type: textarea
+  attributes:
+    label: Implementation method (optional)
+    description: How would someone go about implementing this?
+
+  

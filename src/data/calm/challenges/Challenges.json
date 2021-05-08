@@ -1,0 +1,229 @@
+{
+  "1": {
+    "name": "Get 50k GEXP in a day",
+    "points": 1,
+    "id": "e1"
+  },
+  "2": {
+    "name": "Click the dragon egg in the pit 15 times",
+    "points": 1,
+    "id": "e2"
+  },
+  "3": {
+    "name": "Have someone give you cookies in Housing.",
+    "points": 1,
+    "id": "e3"
+  },
+  "4": {
+    "name": "Break 3 beds in 3s/4s Bedwars.",
+    "points": 1,
+    "id": "e4"
+  },
+  "5": {
+    "name": "Win Quake.",
+    "points": 1,
+    "id": "e5"
+  },
+  "6": {
+    "name": "Win Farm Hunt as an animal.",
+    "points": 1,
+    "id": "e6"
+  },
+  "7": {
+    "name": "Obtain a strength pot in Speed UHC.",
+    "points": 1,
+    "id": "e7"
+  },
+  "8": {
+    "name": "TNT or Fireball at least 40 blocks in Bedwars Practice mode.",
+    "points": 1,
+    "id": "e8"
+  },
+  "9": {
+    "name": "Win Easter Simulator",
+    "points": 1,
+    "id": "e9"
+  },
+  "10": {
+    "name": "Get a Duels winstreak of 25",
+    "points": 1,
+    "id": "e10"
+  },
+  "11": {
+    "name": "Find 30 eggs in a game of Easter Simulator",
+    "points": 1,
+    "id": "e11"
+  },
+  "12": {
+    "name": "Get a screenshot with 5 or more Calm Members",
+    "points": 1,
+    "id": "e12"
+  },
+  "13": {
+    "name": "Finish a Bedwars quest",
+    "points": 1,
+    "id": "e13"
+  },
+  "14": {
+    "name": "Match and chat with a Calm member on bwtinder",
+    "points": 1,
+    "id": "e14"
+  },
+  "15": {
+    "name": "Wear the Chicken Head in Skyblock",
+    "points": 1,
+    "id": "e15"
+  },
+
+  "16": {
+    "name": "Get 35xp in a Skywars game",
+    "points": 3,
+    "id": "m1"
+  },
+  "17": {
+    "name": "Get 150k GEXP in a day",
+    "points": 3,
+    "id": "m2"
+  },
+  "18": {
+    "name": "Get a heavenly head in Skywars",
+    "points": 3,
+    "id": "m3"
+  },
+  "19": {
+    "name": "Beat a dungeon with a score of S+ in under 5mins",
+    "points": 3,
+    "id": "m4"
+  },
+  "20": {
+    "name": "Collect 250 raffle tickets in a Skyblock event",
+    "points": 3,
+    "id": "m5"
+  },
+  "21": {
+    "name": "Win PVP Run without double jumps",
+    "points": 3,
+    "id": "m6"
+  },
+  "22": {
+    "name": "Get 10 kills in doubles Skywars",
+    "points": 3,
+    "id": "m7"
+  },
+  "23": {
+    "name": "Win Quake with 2nd place having <25",
+    "points": 3,
+    "id": "m8"
+  },
+  "24": {
+    "name": "Win Prop Hunt as a hider",
+    "points": 3,
+    "id": "m9"
+  },
+  "25": {
+    "name": "Place an extra bed in Bedwars Lucky Block",
+    "points": 3,
+    "id": "m10"
+  },
+  "26": {
+    "name": "Win Easter Simulator with 50 eggs",
+    "points": 3,
+    "id": "m11"
+  },
+  "27": {
+    "name": "Get a Duels winstreak of 50",
+    "points": 3,
+    "id": "m12"
+  },
+  "28": {
+    "name": "Win Skywars with 2 challenges on",
+    "points": 3,
+    "id": "m13"
+  },
+  "29": {
+    "name": "Find the Bunny in the Easter Simulator game",
+    "points": 3,
+    "id": "m14"
+  },
+  "30": {
+    "name": "Win a game of Duels with 50% accuracy",
+    "points": 3,
+    "id": "m15"
+  },
+
+  "31": {
+    "name": "Get 300k GEXP in a day",
+    "points": 5,
+    "id": "h1"
+  },
+  "32": {
+    "name": "Get 6 beds in a Solo Bedwars Game",
+    "points": 5,
+    "id": "h2"
+  },
+  "33": {
+    "name": "Win Quake with 2nd place having <20",
+    "points": 5,
+    "id": "h3"
+  },
+  "34": {
+    "name": "Complete the Bedwars parkour in under 43 seconds",
+    "points": 5,
+    "id": "h4"
+  },
+  "35": {
+    "name": "Win Easter Simulator with 70 eggs",
+    "points": 5,
+    "id": "h5"
+  },
+  "36": {
+    "name": "Get a Duels winstreak of 75",
+    "points": 5,
+    "id": "h6"
+  },
+  "37": {
+    "name": "Win Skywars with 6 or more challenges on",
+    "points": 5,
+    "id": "h7"
+  },
+  "38": {
+    "name": "Kill 7 or 8 people in Solo Skywars",
+    "points": 5,
+    "id": "h8"
+  },
+  "39": {
+    "name": "Win a game of Duels with 85% accuracy",
+    "points": 5,
+    "id": "h9"
+  },
+  "40": {
+    "name": "Win a game of Vampirez as last survivor",
+    "points": 5,
+    "id": "h10"
+  },
+  "41": {
+    "name": "Kill all players as murderer in Classic MM",
+    "points": 5,
+    "id": "h11"
+  },
+  "42": {
+    "name": "Win a game of Bedwars in under 2 mins",
+    "points": 5,
+    "id": "h12"
+  },
+  "43": {
+    "name": "Get 45xp or more in a Skywars game",
+    "points": 5,
+    "id": "h13"
+  },
+  "44": {
+    "name": "Get 150 kills or more in a Paintball game",
+    "points": 5,
+    "id": "h14"
+  },
+  "45": {
+    "name": "Win a game of Smash Heroes without losing a life",
+    "points": 5,
+    "id": "h15"
+  }
+}

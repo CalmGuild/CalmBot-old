@@ -1,0 +1,42 @@
+name: Bug report
+description: File a bug report for us to fix
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report. Please be a descriptive as possible so we can improve.
+
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce this behaviour
+      placeholder: |
+        1. Do that
+        2. Then this
+        3. Error there
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behaviour
+      description: Describe what should be happening.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Screenshots / Videos
+      description: If applicable, add screenshots to help explain your problem.
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here

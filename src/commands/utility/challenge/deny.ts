@@ -7,8 +7,8 @@ import Roles from "../../../data/calm/roles.json";
 function DenyCommand(): ICommand {
   const run: RunCallback = async (client: Client, message: Message, args: string[]) => {
     if (!message.member || !message.guild) return;
-
     let requestmessage;
+    
     try {
       requestmessage = await message.channel.messages.fetch(args[0] as string);
     } catch (e) {
@@ -74,12 +74,12 @@ function DenyCommand(): ICommand {
 
     let commandChannel: TextChannel;
     if (message.guild.id === "501501905508237312") {
-      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.COMMUNITY.COMMANDS.id) as TextChannel;
+      commandChannel = message.guild.channels.cache.find((c) => c.id === Channels.WEEKLY_MONTHLY.CHALLENGE_PROOF.id) as TextChannel;
     } else {
-      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.COMMUNITY.COMMANDS.name) as TextChannel;
+      commandChannel = message.guild.channels.cache.find((c) => c.name === Channels.WEEKLY_MONTHLY.CHALLENGE_PROOF.name) as TextChannel;
     }
 
-    if (commandChannel !== undefined) {
+    if (commandChannel) {
       commandChannel.send(`Sorry, <@${userID}>. your challenge request for challenge #${challengeID} has been denied.\n**REASON:** ${reason}`);
     }
     requestmessage.reactions.removeAll();
