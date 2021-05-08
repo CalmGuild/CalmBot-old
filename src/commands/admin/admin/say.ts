@@ -1,6 +1,7 @@
 import { Message, TextChannel, VoiceChannel } from "discord.js";
 import Client from "../../../structures/Client";
 import { ICommand, RunCallback } from "../../../structures/Interfaces";
+import logger from "../../../utils/logger/Logger";
 
 function SayCommand(): ICommand {
   const run: RunCallback = async (client: Client, message: Message, args: string[]) => {
@@ -18,7 +19,10 @@ function SayCommand(): ICommand {
       message.channel.send("Only can send messages in text channels!");
     }
 
-    (channel as TextChannel).send(msg);
+    (channel as TextChannel).send(msg).catch((err) => {
+      message.channel.send("Error sending message in that channel!");
+      logger.error(err);
+    });
   };
 
   return {
