@@ -62,14 +62,7 @@ export default {
 
 async function getRole(guild: Guild, roleid?: string, rolename?: string): Promise<Role | undefined> {
   if (guild.id == "501501905508237312" && roleid) {
-    guild.roles
-      .fetch(roleid)
-      .then((role) => {
-        return role;
-      })
-      .catch((err) => {
-        return undefined;
-      });
+    return guild.roles.cache.find((r) => r.id === roleid);
   } else if (rolename) {
     return guild.roles.cache.find((r) => r.name === rolename);
   }
