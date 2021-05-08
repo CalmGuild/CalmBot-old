@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import Discord, { Collection, Message } from "discord.js";
+import Discord, { Collection, DMChannel, Message, NewsChannel, TextChannel } from "discord.js";
 import Database from "../utils/database/Database";
 import logger from "../utils/logger/Logger";
-import { ICommand, IReactionListener, ISubCommandSettings, ReactionCallback } from "./Interfaces";
+import { ICommand, IPromptListener, IReactionListener, ISubCommandSettings, PromptCallback, ReactionCallback } from "./Interfaces";
 
 import PermissionHandler from "../utils/Permissions/Permission";
 import Permission from "../utils/Permissions/Permission";
@@ -17,6 +17,7 @@ export default class Client extends Discord.Client {
   commands: Collection<string, ICommand> = new Collection();
   developers = ["438057670042320896" /*Miqhtie*/, "234576713005137920" /*Joel*/];
   reactionListeners: IReactionListener[] = [];
+  promptListeners: IPromptListener[] = [];
 
   constructor() {
     super({
@@ -236,5 +237,31 @@ export default class Client extends Discord.Client {
       callback: callback,
       userwhitelist: userwhitelist,
     });
+  }
+
+  addPromptListener(prompt: string, channel: TextChannel | DMChannel | NewsChannel, user: string, timeout: number, callback: PromptCallback) {
+    // Override any existing prompts
+    this.promptListeners = this.promptListeners.filter((ele) => {
+      ele.user !== user && ele.channel !== channel.id;
+    });
+
+    channel
+      .send(prompt + `\n***Type "exit" to exit. Expres in \`${timeout}\` seconds***`)
+      .then((message) => {
+        this.promptListeners.push({
+          user: user,
+          channel: message.channel.id,
+          callback: callback,
+        });
+
+        this.setTimeout(() => {
+          this.promptListeners = this.promptListeners.filter((ele) => {
+            ele.user !== user && ele.channel !== channel.id;
+          });
+        }, timeout * 1000);
+      })
+      .catch((err) => {
+        logger.error(err);
+      });
   }
 }

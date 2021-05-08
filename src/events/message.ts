@@ -5,6 +5,21 @@ import Database from "../utils/database/Database";
 export default async function message(client: DiscordClient, message: Message) {
   if (message.author.bot) return;
 
+  const prompt = client.promptListeners.find((p) => p.channel === message.channel.id && p.user === message.author.id);
+  if (prompt) {
+    client.promptListeners = client.promptListeners.filter((ele) => {
+      ele !== prompt;
+    });
+
+    if (message.content.toLowerCase() === "exit") {
+      message.channel.send("Exited.");
+      return;
+    }
+    
+    prompt.callback(message);
+    return;
+  }
+
   if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 
   if (message.guild) {

@@ -3,12 +3,19 @@ import Client from "./Client";
 
 export type RunCallback = (client: Client, message: Message, args: string[]) => void;
 export type ReactionCallback = (client: Client, reaction: MessageReaction, user: User) => void;
+export type PromptCallback = (response: Message) => void;
 export type Permission = PermissionResolvable | PermissionsEnum;
 
 export interface IReactionListener {
   messageid: string;
   callback: ReactionCallback;
   userwhitelist?: string[];
+}
+
+export interface IPromptListener {
+  user: string;
+  channel: string;
+  callback: PromptCallback;
 }
 export interface ICommand {
   settings: ICommandSettings | undefined;
