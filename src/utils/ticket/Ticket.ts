@@ -1,9 +1,7 @@
-import { Channel, GuildMember, MessageEmbed, PermissionOverwriteOption } from "discord.js";
+import { Channel, GuildMember, MessageEmbed, OverwriteResolvable } from "discord.js";
 import Client from "../../structures/Client";
 import { IGuildSettings } from "../../schemas/GuildSettings";
 import logger from "../logger/Logger";
-const channelOverwrite: PermissionOverwriteOption = { READ_MESSAGE_HISTORY: true, SEND_MESSAGES: true, VIEW_CHANNEL: true, USE_EXTERNAL_EMOJIS: true, ATTACH_FILES: true, EMBED_LINKS: true };
-
 export default class Ticket {
   private owner: GuildMember | undefined;
   private type: TicketType | undefined;
@@ -18,39 +16,26 @@ export default class Ticket {
   }
 
   create(): Promise<Channel | undefined> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const id = this.settings!.totalTickets + 1;
       const guild = this.owner?.guild!;
 
       this.settings!.totalTickets = id;
-      this.settings?.save();
+      await this.settings?.save();
+
+      const channelOverwrites: OverwriteResolvable[] = [
+        { deny: ["VIEW_CHANNEL"], id: guild.roles.everyone.id },
+        { allow: ["READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: this.owner!!.id },
+      ];
+
+      this.settings!!.ticketRoles = this.settings!!.ticketRoles.filter((ele) => guild.roles.cache.has(ele));
+      await this.settings?.save(); // Remove all roles in database that aren't in the server (that have been deleted)
+
+      this.settings?.ticketRoles.forEach((roleid) => channelOverwrites.push({ allow: ["READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: roleid }));
 
       guild.channels
-        .create(`ticket-${id}`)
+        .create(`ticket-${id}`, { permissionOverwrites: channelOverwrites, topic: `Ticket created by ${this.owner ? this.owner.user.tag : "Couldn't get user!"}` })
         .then(async (channel) => {
-          // Make sure no one else can see it
-          channel.updateOverwrite(guild.roles.everyone, { VIEW_CHANNEL: false });
-
-          // Give ticket creator permissions to see ticket
-          channel.updateOverwrite(this.owner!, channelOverwrite);
-
-          // Give staff roles permission to see ticket
-          this.settings!.ticketRoles.forEach((roleid) => {
-            guild.roles
-              .fetch(roleid)
-              .then((role) => {
-                if (role) channel.updateOverwrite(role, channelOverwrite);
-                else {
-                  this.settings!.ticketRoles = this.settings!.ticketRoles.filter((ele) => ele != roleid);
-                  this.settings?.save();
-                }
-              })
-              .catch((err) => {
-                this.settings!.ticketRoles = this.settings!.ticketRoles.filter((ele) => ele != roleid);
-                this.settings?.save();
-              });
-          });
-
           let tag = this.settings?.ticketSupportedRole ? `<@&${this.settings.ticketSupportedRole}>` : "";
 
           let ticketEmbed = new MessageEmbed()
