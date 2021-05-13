@@ -12,20 +12,24 @@ function FormatCommand(): ICommand {
       return;
     }
 
-    if (message.attachments.size == 0 || !attachIsImage(message.attachments.array()[0]!!)) {
-      message.channel.send("Please attach an image as evidence!");
-      return;
-    }
+    let image: string | undefined = undefined;
+    if (message.attachments.size > 0 && attachIsImage(message.attachments.array()[0]!!)) image = message.attachments.array()[0]!!.url;
 
     const userid = args[1];
 
     client.users
       .fetch(userid as string)
       .then((user) => {
-        message.channel.send(genFormat(args[0]!!, user.tag, user.id, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0]!!.url] });
+        const msg = genFormat(args[0]!!, user.tag, user.id, args.slice(2, args.length).join(" ") as string);
+
+        if (image) message.channel.send(msg, { files: [image] });
+        else message.channel.send(msg);
       })
       .catch(() => {
-        message.channel.send(genFormat(args[0] as string, "Invalid user ID", args[1] as string, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0]!!.url] });
+        const msg = genFormat(args[0] as string, "Invalid user ID", args[1] as string, args.slice(2, args.length).join(" ") as string);
+
+        if (image) message.channel.send(msg, { files: [image] });
+        else message.channel.send(msg);
       });
   };
 
@@ -33,7 +37,7 @@ function FormatCommand(): ICommand {
     run: run,
     settings: {
       description: "Generate a punishment format",
-      usage: "format <punishment type> <user id> <reason> <attach image>",
+      usage: "format <punishment type> <user id> <reason> [attach image]",
       guildOnly: true,
       permissions: PermissionsEnum.STAFF,
     },
