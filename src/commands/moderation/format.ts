@@ -19,12 +19,12 @@ function FormatCommand(): ICommand {
 
     const userid = args[1];
 
-    message
-      .guild!!.members.fetch(userid as string)
-      .then((member) => {
-        message.channel.send(genFormat(args[0] as string, member.user.tag, member.id, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0]!!.url] });
+    client.users
+      .fetch(userid as string)
+      .then((user) => {
+        message.channel.send(genFormat(args[0]!!, user.tag, user.id, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0]!!.url] });
       })
-      .catch((e) => {
+      .catch(() => {
         message.channel.send(genFormat(args[0] as string, "Invalid user ID", args[1] as string, args.slice(2, args.length).join(" ") as string), { files: [message.attachments.array()[0]!!.url] });
       });
   };
