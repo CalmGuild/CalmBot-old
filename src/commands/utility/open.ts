@@ -90,7 +90,7 @@ function OpenCommand(): ICommand {
     run: run,
     settings: {
       description: "Open a ticket",
-      usage: "ticket open",
+      usage: "open",
       guildOnly: true
     },
   };
