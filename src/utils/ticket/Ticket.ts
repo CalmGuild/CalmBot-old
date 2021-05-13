@@ -40,7 +40,7 @@ export default class Ticket {
 
           let ticketEmbed = new MessageEmbed()
             .setTitle("Welcome to the ticket")
-            .setDescription(`Staff will be with you shortly, please be patient. When you are ready to close this do ${this.client?.prefix}ticket close`)
+            .setDescription(`Staff will be with you shortly, please be patient. When you are ready to close this do **${this.client?.prefix}ticket close**`)
             .addField("Ticket Type:", this.type);
 
           channel.send(tag, ticketEmbed);
