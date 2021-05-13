@@ -25,7 +25,7 @@ export default class Ticket {
 
       const channelOverwrites: OverwriteResolvable[] = [
         { deny: ["VIEW_CHANNEL"], id: guild.roles.everyone.id },
-        { allow: ["READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: this.owner!!.id },
+        { allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: this.owner!!.id },
       ];
 
       this.settings!!.ticketRoles = this.settings!!.ticketRoles.filter((ele) => guild.roles.cache.has(ele));
