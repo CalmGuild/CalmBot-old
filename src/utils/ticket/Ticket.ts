@@ -31,7 +31,7 @@ export default class Ticket {
       this.settings!!.ticketRoles = this.settings!!.ticketRoles.filter((ele) => guild.roles.cache.has(ele));
       await this.settings?.save(); // Remove all roles in database that aren't in the server (that have been deleted)
 
-      this.settings?.ticketRoles.forEach((roleid) => channelOverwrites.push({ allow: ["READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: roleid }));
+      this.settings?.ticketRoles.forEach((roleid) => channelOverwrites.push({ allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: roleid }));
 
       guild.channels
         .create(`ticket-${id}`, { permissionOverwrites: channelOverwrites, topic: `Ticket created by ${this.owner ? this.owner.user.tag : "Couldn't get user!"}` })

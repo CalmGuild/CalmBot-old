@@ -27,7 +27,7 @@ function FormatCommand(): ICommand {
       })
       .catch(() => {
         const msg = genFormat(args[0] as string, "Invalid user ID", args[1] as string, args.slice(2, args.length).join(" ") as string);
-
+        message.author.discriminator
         if (image) message.channel.send(msg, { files: [image] });
         else message.channel.send(msg);
       });
