@@ -30,6 +30,7 @@ function InfoCommand(): ICommand {
 
       embed.addField("Case number: ", warning.casenumber, true);
       embed.addField("Moderator: ", modtext);
+      embed.addField("Time:", warning.timestamp ? warning.timestamp : "No timestamp found!");
       if (warning.reasonText !== undefined) embed.addField("Reason: ", warning.reasonText);
       if (warning.reasonImage !== undefined) embed.setImage(warning.reasonImage);
 
@@ -42,7 +43,7 @@ function InfoCommand(): ICommand {
     settings: {
       description: "Get all verbal warnings for a specific user.",
       usage: "verbal info <userid>",
-      minimumArgs: 1
+      minimumArgs: 1,
     },
   };
 }

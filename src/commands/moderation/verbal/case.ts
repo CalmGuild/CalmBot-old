@@ -8,10 +8,10 @@ function CastCommand(): ICommand {
     if (!message.guild) return;
     const warning = await getWarningFromCase(message.guild.id, args[0] as string);
 
-    if (!warning){
+    if (!warning) {
       message.channel.send("Could not find an active or inactive verbal with caseid " + args[0]);
       return;
-    } 
+    }
 
     let embed = new MessageEmbed();
     embed.setTitle("Case Number: " + args[0]);
@@ -27,11 +27,11 @@ function CastCommand(): ICommand {
 
     embed.addField("User:", membertext);
     embed.addField("Moderator:", modtext);
+    embed.addField("Time:", warning.timestamp ? warning.timestamp : "No timestamp found!");
     if (warning.reasonText) embed.addField("Reason: ", warning.reasonText);
     if (warning.reasonImage) embed.setImage(warning.reasonImage);
 
     message.channel.send(embed);
-   
   };
 
   return {

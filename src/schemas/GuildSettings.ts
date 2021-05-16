@@ -6,6 +6,7 @@ export interface IVerbals {
   reasonText: string;
   reasonImage: string;
   casenumber: number;
+  timestamp: string;
 }
 
 interface ISuggestions {

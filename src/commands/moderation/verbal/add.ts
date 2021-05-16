@@ -40,7 +40,7 @@ function AddCommand(): ICommand {
     }
 
     const casenumber = guildSettings.punishmentcases;
-    guildSettings.verbals.push({ moderator: message.author.id, user: member.id, reasonText: reason, reasonImage: imgurl, casenumber: casenumber });
+    guildSettings.verbals.push({ moderator: message.author.id, user: member.id, reasonText: reason, reasonImage: imgurl, casenumber: casenumber, timestamp: new Date().toDateString() });
     guildSettings.punishmentcases = guildSettings.punishmentcases + 1;
     await guildSettings.save();
 
