@@ -1,7 +1,9 @@
-import { Guild, GuildMember, Message, MessageEmbed } from "discord.js";
+import { Guild, GuildChannel, GuildMember, Message, MessageEmbed, TextChannel } from "discord.js";
 import Client from "../../../structures/Client";
 import { ICommand, RunCallback } from "../../../structures/Interfaces";
+import Channels from "../../../data/calm/channels.json";
 import Database from "../../../utils/database/Database";
+import logger from "../../../utils/logger/Logger";
 
 function AddCommand(): ICommand {
   const run: RunCallback = async (client: Client, message: Message, args: string[]) => {
@@ -47,6 +49,29 @@ function AddCommand(): ICommand {
     const embed = new MessageEmbed().setTitle(`${member.user.tag} has been verbal warned! Case: ${casenumber}`).setColor("#48db8f");
     message.channel.send(embed);
     message.channel.send(`**Type of Punishment**: Verbal Warning\n**Discord Name & #**: ${member.user.tag}\n**Discord ID**: ${member.id}\n**Evidence**: ${reason}`, { files: [imgurl] });
+
+    let modlogs: GuildChannel | undefined = undefined;
+    if (message.guild.id === "501501905508237312") {
+      modlogs = message.guild.channels.cache.get(Channels.STAFF.MOD_LOG.id);
+    } else {
+      modlogs = message.guild.channels.cache.find((c) => c.name === Channels.STAFF.MOD_LOG.name);
+    }
+
+    if (modlogs && modlogs instanceof TextChannel) {
+      const modlog = new MessageEmbed();
+      modlog.setAuthor(`Case ${casenumber} | Verbal Warning | ${member.user.tag}`, member.user.displayAvatarURL());
+      modlog.addField("User", member.user.toString(), true);
+      modlog.addField("Moderator", message.author.toString(), true);
+      modlog.addField("Reason", reason, true);
+      modlog.setImage(imgurl);
+      modlog.setFooter(`ID: ${member.id}`).setTimestamp();
+
+      modlogs.send(modlog).catch((err) => {
+        logger.error(err);
+      });
+    } else {
+      logger.warn(`Could not find modlogs channel. GUILD: ${message.guild.id}`)
+    }
   };
 
   return {
