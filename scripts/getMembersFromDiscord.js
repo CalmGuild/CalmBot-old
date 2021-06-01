@@ -62,7 +62,8 @@ async function run() {
       console.log("Couldn't find ign for " + member.user.tag);
       continue;
     }
-    name = name.split(" ")[1];
+    name = name.slice(name.indexOf("]") + 2);
+    name = name.slice(0, name.indexOf(" "));
     if (!name) {
       console.log("Couldn't find ign for " + member.nickname);
       continue;
