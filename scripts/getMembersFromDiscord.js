@@ -71,7 +71,7 @@ async function run() {
       console.log("Couldn't find ign for " + member.nickname);
       continue;
     }
-    const i = members.findIndex((m) => m.ign === name);
+    const i = members.findIndex((m) => m.ign.toLowerCase() === name.toLowerCase());
     if (i === -1) {
       console.log(`${member.nickname} isn't in the guild`);
       continue;
