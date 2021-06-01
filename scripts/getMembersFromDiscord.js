@@ -38,12 +38,12 @@ async function run() {
     const names = res?.data;
     if (!names) {
       console.log("Failed to request name of " + uuid);
-      members.push({ uuid, ign: "" });
+      members.push({ uuid, ign: "", id: "", nick: "", tag: "" });
       return;
     }
     const ign = names[names.length - 1].name;
 
-    members.push({ uuid, ign });
+    members.push({ uuid, ign, id: "", nick: "", tag: "" });
     console.log(`${uuid}:${ign}`);
   }
 
@@ -71,9 +71,6 @@ async function run() {
     console.log(i);
     if (i === -1) {
       console.log(`${member.nickname} isn't in the guild`);
-      members[i].id = "";
-      members[i].nick = "";
-      members[i].tag = "";
       continue;
     }
 
