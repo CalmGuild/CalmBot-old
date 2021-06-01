@@ -72,7 +72,6 @@ async function run() {
       continue;
     }
     const i = members.findIndex((m) => m.ign === name);
-    console.log(i);
     if (i === -1) {
       console.log(`${member.nickname} isn't in the guild`);
       continue;
