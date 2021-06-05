@@ -4,6 +4,7 @@ import GuildSettings from "../../schemas/GuildSettings";
 import ChallengeParticipant from "../../schemas/ChallengeParticipant";
 import Client from "../../structures/Client";
 import logger from "../logger/Logger";
+import User, { IUser } from "../../schemas/User";
 
 export default {
   initialize: async (url: string, client: Client) => {
@@ -36,5 +37,25 @@ export default {
       participant = await ChallengeParticipant.findOne({ discordID: discordid });
     }
     return participant;
+  },
+
+  getUser: (discordid: string): Promise<IUser> => {
+    return new Promise(async (resolve, reject) => {
+      const user = await User.findOne({ discordID: discordid });
+      if (user) resolve(user);
+      reject(undefined);
+    });
+  },
+
+  createUser(discordid: string, uuid: string, inCalm: boolean): Promise<IUser> {
+    return new Promise((resolve, reject) => {
+      const user = new User({ discordID: discordid, uuid: uuid, inCalm: inCalm });
+      user
+        .save()
+        .then((savedUser) => {
+          resolve(savedUser);
+        })
+        .catch((err) => reject(err));
+    });
   },
 };
