@@ -21,23 +21,18 @@ function ForceLinkCommand(): ICommand {
           .then((user) => {
             message.channel.send(`Discord user is already linked to ${user.id}`);
           })
-          .catch(() => {
-            MojangApi.getUUID(args[1]!!)
-              .then((uuid) => {
-                if (!uuid) {
-                  message.channel.send("Invalid minecraft name.");
-                  return;
-                }
+          .catch(async () => {
+            const uuid = await MojangApi.getUUID(args[1]!!);
 
-                const inCalm = member.roles.cache.has(calmiesRole.id);
-                Database.createUser(member.id, uuid, inCalm)
-                  .then((user) => {
-                    message.channel.send(`Created new database entry!\n\`\`\`${user}\`\`\``).catch(logger.error);
-                  })
-                  .catch((err) => {
-                    message.channel.send("An error occurred while running that command! Please contact a developer.");
-                    logger.error(err);
-                  });
+            if (!uuid) {
+              message.channel.send("Invalid minecraft name.");
+              return;
+            }
+
+            const inCalm = member.roles.cache.has(calmiesRole.id);
+            Database.createUser(member.id, uuid, inCalm)
+              .then((user) => {
+                message.channel.send(`Created new database entry!\n\`\`\`${user}\`\`\``).catch(logger.error);
               })
               .catch((err) => {
                 message.channel.send("An error occurred while running that command! Please contact a developer.");
