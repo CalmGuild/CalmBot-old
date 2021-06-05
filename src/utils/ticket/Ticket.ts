@@ -1,7 +1,11 @@
-import { Channel, GuildMember, MessageEmbed, OverwriteResolvable } from "discord.js";
+import { Channel, GuildMember, MessageEmbed, OverwriteResolvable, PermissionString } from "discord.js";
 import Client from "../../structures/Client";
+import Roles from "../../data/calm/roles.json";
 import { IGuildSettings } from "../../schemas/GuildSettings";
 import logger from "../logger/Logger";
+
+const allow: PermissionString[] = ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"];
+
 export default class Ticket {
   private owner: GuildMember | undefined;
   private type: TicketType | undefined;
@@ -25,13 +29,17 @@ export default class Ticket {
 
       const channelOverwrites: OverwriteResolvable[] = [
         { deny: ["VIEW_CHANNEL"], id: guild.roles.everyone.id },
-        { allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: this.owner!!.id },
+        { allow: allow, id: this.owner!!.id },
       ];
+
+      const botRoleData = Roles.GENERAL.BOTS;
+      const botsRole = guild.id === "501501905508237312" ? guild.roles.cache.get(botRoleData.id) : guild.roles.cache.find((r) => r.name === botRoleData.name);
+      if (botsRole) channelOverwrites.push({ allow: allow, id: botsRole.id });
 
       this.settings!!.ticketRoles = this.settings!!.ticketRoles.filter((ele) => guild.roles.cache.has(ele));
       await this.settings?.save(); // Remove all roles in database that aren't in the server (that have been deleted)
 
-      this.settings?.ticketRoles.forEach((roleid) => channelOverwrites.push({ allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"], id: roleid }));
+      this.settings?.ticketRoles.forEach((roleid) => channelOverwrites.push({ allow: allow, id: roleid }));
 
       guild.channels
         .create(`ticket-${id}`, { permissionOverwrites: channelOverwrites, topic: `Ticket created by ${this.owner ? this.owner.user.tag : "Couldn't get user!"}` })
