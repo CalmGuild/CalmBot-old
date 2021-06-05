@@ -256,6 +256,11 @@
     }
   },
   "STAFF": {
+    "STAFF_CHAT": {
+      "name": "staff-chat",
+      "id": "547923467522015263",
+      "public": false
+    },
     "CHALLENGES": {
       "name": "challenge-requests",
       "id": "787202572032278539",
