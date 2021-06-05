@@ -39,9 +39,11 @@ export default {
     return participant;
   },
 
-  getUser: (discordid: string): Promise<IUser> => {
+  getUser: (id: string): Promise<IUser> => {
     return new Promise(async (resolve, reject) => {
-      const user = await User.findOne({ discordID: discordid });
+      let user = await User.findOne({ discordID: id });
+      if (user) resolve(user);
+      user = await User.findOne({ uuid: id });
       if (user) resolve(user);
       reject(undefined);
     });
