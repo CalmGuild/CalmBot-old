@@ -57,51 +57,27 @@ function LockdownCommand(): ICommand {
         } else if (channelProperties.public && fullLock) {
           switch (k) {
             case "UPON_JOINING":
-              fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "IMPORTANT":
-              fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "SUGGESTIONS":
-              fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "COMMUNITY":
-              fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "MISC":
-              fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "VOICE":
-              fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "EVENTS":
               fullLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
               break;
-          } // End Switch
+          }
         } else if (channelProperties.public && !fullLock) {
           switch (k) {
             case "UPON_JOINING":
-              normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "IMPORTANT":
-              normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "SUGGESTIONS":
-              normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "COMMUNITY":
-              normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "MISC":
-              normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "VOICE":
-              normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
-              break;
             case "EVENTS":
               normalLockOverwrite(channel, guildMemberRole, nitroBoosterRole);
               break;
-          } // End Switch
+          }
         }
       }
     }
