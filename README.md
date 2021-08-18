@@ -1,6 +1,6 @@
 
 # CalmBot
-
+## This project will only be updated in the event of a breaking bug. Please see [calmbot-next](https://github.com/calmguild/calmbot-next)
   
 
 > CalmBot is an open-source Discord bot, built with discord.js
